@@ -403,8 +403,8 @@ void test_suffix_array_hello_world()
 void test_suffix_array_lcp()
 {
     log("run");
-    auto array = enhanced_suffix_array{"banana$"sv};
-    auto expect = {0, 1, 3, 0, 0, 2, 0};
+    auto array = enhanced_suffix_array{"banana"sv};
+    auto expect = {1, 3, 0, 0, 2, 0};
     check(std::ranges::equal(
         std::span{array.longest_common_prefixes(), array.size()}, expect));
 }
