@@ -1,0 +1,27 @@
+language: cpp
+sudo: true
+os: linux
+dist: jammy
+git:
+  depth: 1
+addons:
+  apt:
+    packages:
+    - g++
+    - doxygen
+script:
+- cd $TRAVIS_BUILD_DIR/example/diff
+- ./gcc.sh
+- cd $TRAVIS_BUILD_DIR/example/suffix_tree_viz
+- ./gcc.sh
+- cd $TRAVIS_BUILD_DIR/test
+- ./gcc.sh
+- cd $TRAVIS_BUILD_DIR
+- doxygen Doxyfile
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: html
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: main
