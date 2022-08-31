@@ -11,10 +11,13 @@ addons:
     - doxygen
 script:
 - cd $TRAVIS_BUILD_DIR/example/diff
+- chmod u+x ./gcc.sh
 - ./gcc.sh
 - cd $TRAVIS_BUILD_DIR/example/suffix_tree_viz
+- chmod u+x ./gcc.sh
 - ./gcc.sh
 - cd $TRAVIS_BUILD_DIR/test
+- chmod u+x ./gcc.sh
 - ./gcc.sh
 - cd $TRAVIS_BUILD_DIR
 - doxygen Doxyfile
