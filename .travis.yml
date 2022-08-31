@@ -19,4 +19,3 @@ script:
 - chmod u+x ./gcc.sh
 - ./gcc.sh
 - cd $TRAVIS_BUILD_DIR
-- doxygen Doxyfile
