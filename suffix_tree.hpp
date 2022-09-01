@@ -112,7 +112,7 @@ public:
         return {last - edge.labels_len, last};
     }
 
-    /// @return the minimum depth edge which labels start with @param str.
+    /// @return the minimum depth edge which labels start with @param str
     std::optional<edge_type> branch(std::ranges::forward_range auto&& str) const
     {
         if (nodes_.empty())

@@ -1,4 +1,4 @@
-# Doxyfile 1.8.15
+# Doxyfile 1.9.1
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = step20
 PROJECT_NUMBER         =
@@ -35,7 +35,6 @@ INHERIT_DOCS           = YES
 SEPARATE_MEMBER_PAGES  = NO
 TAB_SIZE               = 4
 ALIASES                =
-TCL_SUBST              =
 OPTIMIZE_OUTPUT_FOR_C  = NO
 OPTIMIZE_OUTPUT_JAVA   = NO
 OPTIMIZE_FOR_FORTRAN   = NO
@@ -177,7 +176,6 @@ CLANG_ASSISTED_PARSING = NO
 CLANG_OPTIONS          =
 CLANG_DATABASE_PATH    =
 ALPHABETICAL_INDEX     = YES
-COLS_IN_ALPHA_INDEX    = 5
 IGNORE_PREFIX          =
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
@@ -293,9 +291,7 @@ GENERATE_TAGFILE       =
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 EXTERNAL_PAGES         = YES
-PERL_PATH              = /usr/bin/perl
 CLASS_DIAGRAMS         = YES
-MSCGEN_PATH            =
 DIA_PATH               =
 HIDE_UNDOC_RELATIONS   = YES
 HAVE_DOT               = NO

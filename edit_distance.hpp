@@ -68,7 +68,10 @@ struct table {
 /// insertions, replacements, deletions, and null actions needed
 /// to change one string into the other.
 /// Time complexity O(N*M), space complexity O(min(N,M)), where:
-/// N - @param r1 length, M - @param r2 length.
+/// N - @param r1 length
+/// M - @param r2 length
+/// @param result - the beginning of the destination range
+/// @param eq - to compare characters
 template <std::ranges::random_access_range R1,
           std::ranges::random_access_range R2,
           std::weakly_incrementable O,

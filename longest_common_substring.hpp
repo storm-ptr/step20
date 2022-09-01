@@ -10,7 +10,12 @@ namespace step20::longest_common_substring {
 /// Find the longest substring of two strings.
 
 /// Substring is contiguous, while subsequence need not be.
-/// @see enhanced_suffix_array with @param less is used under the hood.
+/// @see enhanced_suffix_array is used under the hood.
+/// Time complexity O((N+M)*log(N+M)*log(N+M)), space complexity O(N+M), where:
+/// N - @param r1 length
+/// M - @param r2 length
+/// @param result - the beginning of the destination range
+/// @param less - to compare characters
 template <std::ranges::input_range R1,
           std::ranges::input_range R2,
           std::weakly_incrementable O,
