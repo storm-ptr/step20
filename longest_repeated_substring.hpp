@@ -33,7 +33,7 @@ auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
 
 /// Suffix tree must be explicit - padded with a terminal symbol.
 /// Time complexity O(N), space complexity O(H), where:
-/// N - text length, H - height of @param tree.
+/// N - text length, H - height of @param tree
 /// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts>
 auto longest_repeated_substring(const suffix_tree<Ts...>& tree)

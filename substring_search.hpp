@@ -55,7 +55,7 @@ auto find_first(const suffix_tree<Ts...>& tree, R&& str)
 
 /// Suffix tree must be explicit - padded with a terminal symbol.
 /// Time complexity O(N) at worst, space complexity O(H), where:
-/// N - text length, H - height of @param tree.
+/// N - text length, H - height of @param tree
 /// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts, std::ranges::forward_range R>
 auto find_all(const suffix_tree<Ts...>& tree, R&& str)
