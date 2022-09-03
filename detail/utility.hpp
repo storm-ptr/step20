@@ -21,10 +21,13 @@ T flip(T n)
     return std::numeric_limits<T>::max() - n;
 }
 
-template <class Less>
-constexpr auto equivalence = [less = Less{}](const auto& lhs, const auto& rhs) {
-    return !less(lhs, rhs) && !less(rhs, lhs);
-};
+template <class Compare>
+constexpr auto equivalence_fn(const Compare& comp)
+{
+    return [comp](const auto& lhs, const auto& rhs) {
+        return !comp(lhs, rhs) && !comp(rhs, lhs);
+    };
+}
 
 template <class Map>
 constexpr auto key_equivalence_fn()
@@ -32,7 +35,7 @@ constexpr auto key_equivalence_fn()
     if constexpr (requires { typename Map::key_equal; })
         return typename Map::key_equal{};
     else if constexpr (requires { typename Map::key_compare; })
-        return equivalence<typename Map::key_compare>;
+        return equivalence_fn(typename Map::key_compare{});
     else
         lazy_static_assert<false>();
 }

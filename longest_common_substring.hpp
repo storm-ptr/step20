@@ -15,12 +15,12 @@ namespace step20::longest_common_substring {
 /// N - @param r1 length
 /// M - @param r2 length
 /// @param result - the beginning of the destination range
-/// @param less - to compare characters
+/// @param comp - to determine the order of characters
 template <std::ranges::input_range R1,
           std::ranges::input_range R2,
           std::weakly_incrementable O,
-          class Less = std::less<>>
-O copy(const R1& r1, const R2& r2, O result, const Less& less = {})
+          class Compare = std::less<>>
+O copy(const R1& r1, const R2& r2, O result, const Compare& comp = {})
 {
     using Char = std::common_type_t<std::ranges::range_value_t<R1>,
                                     std::ranges::range_value_t<R2>>;
@@ -29,7 +29,8 @@ O copy(const R1& r1, const R2& r2, O result, const Less& less = {})
     str.append(std::ranges::begin(r1), std::ranges::end(r1));
     Size mid = str.size();
     str.append(std::ranges::begin(r2), std::ranges::end(r2));
-    auto array = enhanced_suffix_array<Char, Size, Less>(std::move(str), less);
+    auto array =
+        enhanced_suffix_array<Char, Size, Compare>(std::move(str), comp);
     auto first = array.data();
     auto last = array.data() + array.size();
     auto substr = std::basic_string_view(last, last);

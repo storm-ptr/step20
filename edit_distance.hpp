@@ -71,7 +71,7 @@ struct table {
 /// N - @param r1 length
 /// M - @param r2 length
 /// @param result - the beginning of the destination range
-/// @param eq - to compare characters
+/// @param eq - to compare characters for equality
 template <std::ranges::random_access_range R1,
           std::ranges::random_access_range R2,
           std::weakly_incrementable O,

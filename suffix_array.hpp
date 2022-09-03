@@ -16,38 +16,39 @@ namespace step20 {
 /// N - text length.
 /// @param Char - type of the characters;
 /// @param Size - to specify the maximum number / offset of characters;
-/// @param Less - to determine the order of characters.
+/// @param Compare - to determine the order of characters.
 template <class Char,
           std::unsigned_integral Size = size_t,
-          class Less = std::less<Char>>
+          class Compare = std::less<Char>>
 class suffix_array {
 public:
     using value_type = Char;
     using size_type = Size;
     const Char* data() const { return str_.data(); }
     Size size() const { return str_.size(); }
+    const Compare& comp() const { return comp_; }
     virtual ~suffix_array() = default;
 
-    explicit suffix_array(std::basic_string<Char> str, const Less& less = {})
-        : less_(less), str_(std::move(str)), idx_(size())
+    explicit suffix_array(std::basic_string<Char> str, const Compare& comp = {})
+        : str_(std::move(str)), idx_(size()), comp_(comp)
     {
         auto sufs = std::vector<suffix>(size());
         auto gen = [i = Size{}]() mutable { return suffix{i++, {}}; };
         auto ch = [&](auto& suf) { return str_[suf.pos]; };
-        auto less_ch = [&](auto& l, auto& r) { return less_(ch(l), ch(r)); };
-        auto less_rank = [](auto& l, auto& r) { return l.rank < r.rank; };
+        auto comp_ch = [&](auto& l, auto& r) { return comp_(ch(l), ch(r)); };
+        auto comp_rank = [](auto& l, auto& r) { return l.rank < r.rank; };
         std::ranges::generate(sufs, gen);
-        fill_first_rank(sufs, less_ch);
+        fill_first_rank(sufs, comp_ch);
         for (Size offset = 1; !sorted(sufs); offset *= 2) {
             fill_second_rank(sufs, offset);
-            fill_first_rank(sufs, less_rank);
+            fill_first_rank(sufs, comp_rank);
         }
         std::ranges::transform(sufs, idx_.begin(), &suffix::pos);
     }
 
     explicit suffix_array(std::ranges::input_range auto&& str,
-                          const Less& less = {})
-        : suffix_array(to<std::basic_string>(str), less)
+                          const Compare& comp = {})
+        : suffix_array(to<std::basic_string>(str), comp)
     {
     }
 
@@ -65,27 +66,27 @@ public:
         auto last = std::ranges::end(str);
         auto i = Size{};
         auto ch = [&](Size n) { return n < str_.size() ? str_[n] : *first; };
-        auto less = [&](Size l, Size r) { return less_(ch(l + i), ch(r + i)); };
+        auto comp = [&](Size l, Size r) { return comp_(ch(l + i), ch(r + i)); };
         for (; first != last; ++first, ++i)
-            result = std::ranges::equal_range(result, size(), less);
+            result = std::ranges::equal_range(result, size(), comp);
         return result;
     }
 
 private:
-    Less less_;
     std::basic_string<Char> str_;
     std::vector<Size> idx_;
+    Compare comp_;
 
     struct suffix {
         Size pos;
         std::pair<Size, Size> rank;
 
-        friend void fill_first_rank(std::vector<suffix>& sufs, auto less)
+        friend void fill_first_rank(std::vector<suffix>& sufs, auto comp)
         {
-            std::ranges::sort(sufs, less);
+            std::ranges::sort(sufs, comp);
             Size acc = 1;
             for (Size i = 1; i < sufs.size(); ++i) {
-                bool diff = less(sufs[i - 1], sufs[i]);
+                bool diff = comp(sufs[i - 1], sufs[i]);
                 sufs[i - 1].rank.first = acc;
                 acc += diff;
             }
@@ -118,14 +119,15 @@ suffix_array(R) -> suffix_array<std::ranges::range_value_t<R>>;
 /// Time and space complexity O(N), where: N - text length.
 template <class Char,
           std::unsigned_integral Size = size_t,
-          class Less = std::less<Char>>
-class enhanced_suffix_array : public suffix_array<Char, Size, Less> {
+          class Compare = std::less<Char>>
+class enhanced_suffix_array : public suffix_array<Char, Size, Compare> {
 public:
-    explicit enhanced_suffix_array(suffix_array<Char, Size, Less>&& array)
-        : suffix_array<Char, Size, Less>(std::move(array)), lcp_(this->size())
+    explicit enhanced_suffix_array(suffix_array<Char, Size, Compare>&& array)
+        : suffix_array<Char, Size, Compare>(std::move(array))
+        , lcp_(this->size())
     {
         auto inverse = std::vector<Size>(this->size());
-        auto eq = equivalence<Less>;
+        auto eq = equivalence_fn(this->comp());
         for (Size i = 0; i < this->size(); ++i)
             inverse[this->sorted_suffixes()[i]] = i;
         for (Size pos = 0, lcp = 0; pos < this->size(); ++pos, lcp -= !!lcp) {
@@ -147,9 +149,9 @@ public:
     }
 
     template <std::ranges::input_range R>
-    explicit enhanced_suffix_array(R&& str, const Less& less = {})
+    explicit enhanced_suffix_array(R&& str, const Compare& comp = {})
         : enhanced_suffix_array(
-              suffix_array<Char, Size, Less>(std::forward<R>(str), less))
+              suffix_array<Char, Size, Compare>(std::forward<R>(str), comp))
     {
     }
 
