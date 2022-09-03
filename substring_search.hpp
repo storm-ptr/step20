@@ -51,11 +51,11 @@ auto find_first(const suffix_tree<Ts...>& tree, R&& str)
     return std::ranges::empty(str) ? std::optional{0} : std::nullopt;
 }
 
-/// Find all occurrences of substring for explicit suffix tree.
+/// Find all occurrences of @param str
 
-/// Explicit means padded with a terminal symbol not seen in the text.
-/// Time complexity O(N) at worst, where: N - @param tree text length.
-/// Space complexity O(H), where: H - @param tree height.
+/// Suffix tree must be explicit - padded with a terminal symbol.
+/// Time complexity O(N) at worst, space complexity O(H), where:
+/// N - text length, H - height of @param tree.
 /// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts, std::ranges::forward_range R>
 auto find_all(const suffix_tree<Ts...>& tree, R&& str)

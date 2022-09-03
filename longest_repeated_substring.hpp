@@ -8,7 +8,7 @@
 
 namespace step20 {
 
-/// Find the longest substring that occurs at least twice in @param array text.
+/// Find the longest substring that occurs at least twice.
 
 /// Substring is contiguous, while subsequence need not be.
 /// Time complexity O(N), where: N - @param array text length.
@@ -29,11 +29,11 @@ auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
     return result;
 }
 
-/// Find the longest substring that occurs at least twice in @param tree text.
+/// Find the longest substring that occurs at least twice.
 
-/// @param tree must be explicit - padded with a terminal symbol.
-/// Time complexity O(N), where: N - @param tree text length.
-/// Space complexity O(H), where: H - @param tree height.
+/// Suffix tree must be explicit - padded with a terminal symbol.
+/// Time complexity O(N), space complexity O(H), where:
+/// N - text length, H - height of @param tree.
 /// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts>
 auto longest_repeated_substring(const suffix_tree<Ts...>& tree)
