@@ -4,7 +4,6 @@
 #include <iostream>
 #include <random>
 #include <source_location>
-#include <span>
 #include <sstream>
 #include <step20/detail/read_file.hpp>
 #include <step20/edit_distance.hpp>
@@ -13,6 +12,7 @@
 #include <step20/longest_common_subsequence.hpp>
 #include <step20/longest_common_substring.hpp>
 #include <step20/longest_repeated_substring.hpp>
+#include <step20/substring_search.hpp>
 #include <step20/suffix_array.hpp>
 #include <step20/suffix_tree.hpp>
 
@@ -393,37 +393,7 @@ void test_longest_repeated_substring_find()
     }
 }
 
-void test_suffix_array_hello_world()
-{
-    log("run");
-    auto array = suffix_array{"space efficient alternative to suffix tree"sv};
-    check(array.find_any("efficient"sv) == 6);
-}
-
-void test_suffix_array_lcp()
-{
-    log("run");
-    auto array = enhanced_suffix_array{"banana"sv};
-    auto expect = {1, 3, 0, 0, 2, 0};
-    check(std::ranges::equal(
-        std::span{array.longest_common_prefixes(), array.size()}, expect));
-}
-
-void test_suffix_array_n_tree_cross_check()
-{
-    log("run");
-    auto str = generate_random_string(std::exp2(17));
-    str.back() = '$';
-    auto array = suffix_array{str};
-    auto tree = to<suffix_tree_viz>(str);
-    auto n = 0;
-    for (auto pos : tree.find_all(""sv))
-        if (pos != str.size())  ///< skip empty suffix
-            check(array.sorted_suffixes()[n++] == pos);
-    check(n == str.size());
-}
-
-void test_suffix_array_n_tree_find()
+void test_substring_search()
 {
     log("run");
     struct {
@@ -446,32 +416,63 @@ void test_suffix_array_n_tree_find()
     };
     for (const auto& [str, substr, expect] : tests) {
         auto array = suffix_array{str};
-        check(array.find_any(str) == 0);
-        check(!array.find_any("not found"sv));
-        if (auto pos = array.find_any(substr))
+        check(substring_search::find_any(array, str) == 0);
+        check(!substring_search::find_any(array, "not found"sv));
+        if (auto pos = substring_search::find_any(array, substr))
             check(std::ranges::find(expect, *pos) != expect.end());
         else
             check(std::ranges::empty(expect));
         check(std::ranges::is_permutation(
-            expect, to<std::vector>(array.find_all(substr))));
+            expect,
+            to<std::vector>(substring_search::find_all(array, substr))));
         auto tree = to<suffix_tree>(str);
-        check(tree.find_first(str) == 0);
-        check(tree.find_first(""sv) == 0);
-        check(!tree.find_first("not found"sv));
-        if (auto pos = tree.find_first(substr))
+        check(substring_search::find_first(tree, str) == 0);
+        check(substring_search::find_first(tree, ""sv) == 0);
+        check(!substring_search::find_first(tree, "not found"sv));
+        if (auto pos = substring_search::find_first(tree, substr))
             check(*expect.begin() == *pos);
         else
             check(std::ranges::empty(expect));
         check(std::ranges::is_permutation(
-            expect, to<std::vector>(tree.find_all(substr))));
+            expect, to<std::vector>(substring_search::find_all(tree, substr))));
     }
+}
+
+void test_suffix_array_hello_world()
+{
+    log("run");
+    auto array = suffix_array{"space efficient alternative to suffix tree"sv};
+    check(substring_search::find_any(array, "efficient"sv) == 6);
+}
+
+void test_suffix_array_lcp()
+{
+    log("run");
+    auto array = enhanced_suffix_array{"banana"sv};
+    auto expect = {1, 3, 0, 0, 2, 0};
+    check(std::ranges::equal(
+        std::span{array.longest_common_prefixes(), array.size()}, expect));
+}
+
+void test_suffix_array_n_tree_cross_check()
+{
+    log("run");
+    auto str = generate_random_string(std::exp2(17));
+    str.back() = '$';
+    auto array = suffix_array{str};
+    auto tree = to<suffix_tree_viz>(str);
+    auto n = 0;
+    for (auto edge : tree.depth_first_search(*tree.branch(""sv)))
+        if (tree.leaf(edge.child_node))
+            check(array.sorted_suffixes()[n++] == tree.labels(edge).first);
+    check(n == str.size());
 }
 
 void test_suffix_tree_hello_world()
 {
     log("run");
     auto tree = to<suffix_tree>("quick search for text within a document"sv);
-    check(tree.find_first("text"sv) == 17);
+    check(substring_search::find_first(tree, "text"sv) == 17);
 }
 
 int main()
@@ -488,10 +489,10 @@ int main()
     test_longest_repeated_substring_case_insensitive();
     test_longest_repeated_substring_hello_world();
     test_longest_repeated_substring_find();
+    test_substring_search();
     test_suffix_array_hello_world();
     test_suffix_array_lcp();
     test_suffix_array_n_tree_cross_check();
-    test_suffix_array_n_tree_find();
     test_suffix_tree_hello_world();
     log("done");
 }

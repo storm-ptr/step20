@@ -5,13 +5,13 @@
 
 #include "suffix_array.hpp"
 #include "suffix_tree.hpp"
-#include <span>
 
 namespace step20 {
 
 /// Find the longest substring that occurs at least twice in @param array text.
 
 /// Substring is contiguous, while subsequence need not be.
+/// Time complexity O(N), where: N - @param array text length.
 template <class... Ts>
 auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
     -> std::basic_string_view<typename enhanced_suffix_array<Ts...>::value_type>
@@ -29,7 +29,12 @@ auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
     return result;
 }
 
+/// Find the longest substring that occurs at least twice in @param tree text.
+
 /// @param tree must be explicit - padded with a terminal symbol.
+/// Time complexity O(N), where: N - @param tree text length.
+/// Space complexity O(H), where: H - @param tree height.
+/// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts>
 auto longest_repeated_substring(const suffix_tree<Ts...>& tree)
     -> std::basic_string_view<typename suffix_tree<Ts...>::value_type>
@@ -38,13 +43,13 @@ auto longest_repeated_substring(const suffix_tree<Ts...>& tree)
     auto first = tree.data();
     auto last = tree.data() + tree.size();
     auto result = std::basic_string_view<Char>{last, last};
-    if (auto edge = tree.branch(std::basic_string_view<Char>{}))
-        for (const auto& edge : tree.depth_first_search(*edge)) {
+    if (auto start = tree.branch(std::basic_string_view<Char>{}))
+        for (auto edge : tree.depth_first_search(*start)) {
             if (tree.leaf(edge.child_node) || edge.labels_len <= result.size())
                 continue;
             auto labels = tree.labels(edge);
             result = std::basic_string_view<Char>{first + labels.first,
-                                                  first + labels.second};
+                                                  first + labels.last};
         }
     return result;
 }

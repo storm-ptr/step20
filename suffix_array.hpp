@@ -3,9 +3,9 @@
 #ifndef STEP20_SUFFIX_ARRAY_HPP
 #define STEP20_SUFFIX_ARRAY_HPP
 
-#include "generator.hpp"
 #include "to.hpp"
 #include <functional>
+#include <span>
 #include <string>
 
 namespace step20 {
@@ -51,23 +51,16 @@ public:
     {
     }
 
-    /// Find substring offset.
+    /// @return starting positions of non-empty suffixes in lexicographic order
+    const Size* sorted_suffixes() const { return idx_.data(); }
+
+    /// @return starting positions of non-empty suffixes starting with substring
 
     /// Time complexity O(M*log(N)), where:
-    /// M - substring length, N - text length.
-    std::optional<Size> find_any(std::ranges::forward_range auto&& str) const
+    /// M - @param str length, N - text length.
+    std::span<const Size> equal_range(std::ranges::input_range auto&& str) const
     {
-        for (auto pos : find_all(str))
-            return pos;
-        return std::nullopt;
-    }
-
-    /// Find all occurrences of the substring.
-    generator<Size> find_all(std::ranges::forward_range auto&& str) const
-    {
-        if (std::ranges::empty(str))
-            co_yield size();
-        auto result = std::ranges::subrange{idx_};
+        auto result = std::span{idx_};
         auto first = std::ranges::begin(str);
         auto last = std::ranges::end(str);
         auto i = Size{};
@@ -75,12 +68,8 @@ public:
         auto less = [&](Size l, Size r) { return less_(ch(l + i), ch(r + i)); };
         for (; first != last; ++first, ++i)
             result = std::ranges::equal_range(result, size(), less);
-        for (auto pos : result)
-            co_yield pos;
+        return result;
     }
-
-    /// Starting positions of non-empty suffixes in lexicographic order.
-    const Size* sorted_suffixes() const { return idx_.data(); }
 
 private:
     Less less_;

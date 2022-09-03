@@ -27,6 +27,7 @@ public:
     using size_type = Size;
     const Char* data() const { return str_.data(); }
     Size size() const { return str_.size(); }
+    bool leaf(Size node) const { return node >= nodes_.size(); }
     virtual ~suffix_tree() = default;
 
     void clear() noexcept
@@ -66,38 +67,16 @@ public:
         throw;
     }
 
-    /// Find offset of the first occurrence of the substring.
-
-    /// Time complexity O(M), where: M - substring length.
-    std::optional<Size> find_first(std::ranges::forward_range auto&& str) const
-    {
-        if (auto edge = branch(str))
-            return labels(*edge).first;
-        return std::ranges::empty(str) ? std::optional{0} : std::nullopt;
-    }
-
-    /// Find all occurrences of the substring for explicit suffix tree.
-
-    /// Explicit means padded with a terminal symbol not seen in the text.
-    generator<Size> find_all(std::ranges::forward_range auto&& str) const
-    {
-        if (std::ranges::empty(str))
-            co_yield size();
-        if (auto edge = branch(str))
-            for (auto edge : depth_first_search(*edge))
-                if (leaf(edge.child_node))
-                    co_yield labels(edge).first;
-    }
+    struct slice_type {
+        Size first, last;  ///< half-open character range
+        Size length() const { return last - first; }
+    };
 
     struct edge_type {
         Size parent_node;
         Size child_node;
         Size labels_len;  ///< number of characters in [root_node .. child_node]
     };
-
-    using slice_type = std::pair<Size, Size>;  ///< half-open character range
-    static Size length(const slice_type& str) { return str.second - str.first; }
-    bool leaf(Size node) const { return node >= nodes_.size(); }
 
     /// @return characters in node
     slice_type label(Size node) const
@@ -108,11 +87,13 @@ public:
     /// @return concatenation of characters in [root_node .. edge.child_node]
     slice_type labels(const edge_type& edge) const
     {
-        auto last = label(edge.child_node).second;
+        auto last = label(edge.child_node).last;
         return {last - edge.labels_len, last};
     }
 
-    /// @return the minimum depth edge which labels start with @param str
+    /// @return the minimum depth edge which labels start with substring
+
+    /// Time complexity O(M), where: M - @param str length.
     std::optional<edge_type> branch(std::ranges::forward_range auto&& str) const
     {
         if (nodes_.empty())
@@ -121,12 +102,12 @@ public:
         auto last = std::ranges::end(str);
         for (auto edge = edge_type{};;) {
             auto lbl = label(edge.child_node);
-            edge.labels_len += length(lbl);
+            edge.labels_len += lbl.length();
             auto diff = std::mismatch(
-                first, last, data() + lbl.first, data() + lbl.second, eq_);
+                first, last, data() + lbl.first, data() + lbl.last, eq_);
             if (diff.first == last)
                 return edge;
-            if (diff.second != data() + lbl.second || leaf(edge.child_node))
+            if (diff.second != data() + lbl.last || leaf(edge.child_node))
                 return std::nullopt;
             auto it = nodes_[edge.child_node].children.find(*diff.first);
             if (it == nodes_[edge.child_node].children.end())
@@ -149,7 +130,7 @@ public:
                             return edge_type{
                                 edge.child_node,
                                 item.second,
-                                edge.labels_len + length(label(item.second))};
+                                edge.labels_len + label(item.second).length()};
                         }),
                     insert_iterator(stack));
         }
@@ -169,7 +150,7 @@ private:
 
     bool skip(Size node)
     {
-        Size len = length(label(node));
+        Size len = label(node).length();
         if (size() <= pos_ + len)
             return false;
         pos_ += len;
@@ -189,7 +170,7 @@ private:
                            {str_[back], flip(back)}},
                           {lbl.first, cut}});
         if (!leaf(old))
-            nodes_[old].label = {cut, lbl.second};
+            nodes_[old].label = {cut, lbl.last};
         return true;
     }
 };

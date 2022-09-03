@@ -22,8 +22,8 @@ struct suffix_tree_viz : suffix_tree<char, uint32_t, std::map<char, uint32_t>> {
         };
         os << "digraph \"" << std::string_view(me.data(), me.size())
            << "\" {\nrankdir=LR\n";
-        if (auto edge = me.branch(std::string_view{}))
-            for (const auto& edge : me.depth_first_search(*edge)) {
+        if (auto start = me.branch(std::string_view{}))
+            for (auto edge : me.depth_first_search(*start)) {
                 child_node_viz(edge);
                 os << " [shape="
                    << (me.leaf(edge.child_node) ? "plaintext" : "point")
@@ -35,7 +35,7 @@ struct suffix_tree_viz : suffix_tree<char, uint32_t, std::map<char, uint32_t>> {
                 child_node_viz(edge);
                 auto lbl = me.label(edge.child_node);
                 os << " [label=\""
-                   << std::string_view(me.data() + lbl.first, me.length(lbl))
+                   << std::string_view(me.data() + lbl.first, lbl.length())
                    << "\"]\n";
             }
         return os << "}\n";

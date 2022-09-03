@@ -12,16 +12,16 @@ Step20 is a C++20, header-only library of STL-like algorithms and data structure
 ### Table of Contents (wiki, examples)
 
 * [edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L134-L141)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L134-L141)
 * [longest common subsequence</summary>](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L299-L303),
-  [example](https://github.com/storm-ptr/step20/blob/master/example/diff/diff.hpp#L48-L67)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L299-L303),
+  [example](https://github.com/storm-ptr/step20/blob/main/example/diff/diff.hpp#L48-L67)
 * [longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L320-L324)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L320-L324)
 * [longest repeated substring](https://en.wikipedia.org/wiki/Longest_repeated_substring_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L366-L368)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L366-L368)
 * [suffix array](https://en.wikipedia.org/wiki/Suffix_array):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L399-L400)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L444-L445)
 * [suffix tree](https://en.wikipedia.org/wiki/Suffix_tree):
-  [snippet](https://github.com/storm-ptr/step20/blob/master/test/main.cpp#L473-L474),
-  [example](https://github.com/storm-ptr/step20/blob/master/example/suffix_tree_viz/suffix_tree_viz.hpp#L15-L43)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L474-L475),
+  [example](https://github.com/storm-ptr/step20/blob/main/example/suffix_tree_viz/suffix_tree_viz.hpp#L16-L42)
