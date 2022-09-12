@@ -10,9 +10,8 @@ namespace step20::substring_search {
 
 /// Find substring offset.
 
-/// Time complexity O(M*log(N)), where:
+/// Space complexity O(1), time complexity O(M*log(N)), where:
 /// M - @param str length, N - @param array text length.
-/// Space complexity O(1).
 template <class... Ts, std::ranges::forward_range R>
 auto find_any(const suffix_array<Ts...>& array, R&& str)
     -> std::optional<typename suffix_array<Ts...>::size_type>
@@ -26,8 +25,8 @@ auto find_any(const suffix_array<Ts...>& array, R&& str)
 
 /// Find all occurrences of @param str
 
-/// Time complexity O(N) at worst, where: N - @param array text length.
-/// Space complexity O(1).
+/// Space complexity O(1), time complexity O(N) at worst, where:
+/// N - @param array text length.
 template <class... Ts, std::ranges::forward_range R>
 auto find_all(const suffix_array<Ts...>& array, R&& str)
     -> generator<typename suffix_array<Ts...>::size_type>
@@ -40,8 +39,7 @@ auto find_all(const suffix_array<Ts...>& array, R&& str)
 
 /// Find offset of the first occurrence of the substring.
 
-/// Time complexity O(M), where: M - substring length.
-/// Space complexity O(1).
+/// Space complexity O(1), time complexity O(M), where: M - substring length.
 template <class... Ts, std::ranges::forward_range R>
 auto find_first(const suffix_tree<Ts...>& tree, R&& str)
     -> std::optional<typename suffix_tree<Ts...>::size_type>
@@ -54,8 +52,8 @@ auto find_first(const suffix_tree<Ts...>& tree, R&& str)
 /// Find all occurrences of @param str
 
 /// Suffix tree must be explicit - padded with a terminal symbol.
-/// Time complexity O(N) at worst, space complexity O(H), where:
-/// N - text length, H - height of @param tree
+/// Space complexity O(H), time complexity O(N) at worst, where:
+/// H - height, N - text length of @param tree;
 /// H is asymptotically close to O(log(N)), O(N) at worst.
 template <class... Ts, std::ranges::forward_range R>
 auto find_all(const suffix_tree<Ts...>& tree, R&& str)
