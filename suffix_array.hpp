@@ -52,10 +52,10 @@ public:
     {
     }
 
-    /// @return starting positions of non-empty suffixes in lexicographic order
+    /// Starting positions of non-empty suffixes in lexicographic order.
     const Size* sorted_suffixes() const { return idx_.data(); }
 
-    /// @return starting positions of non-empty suffixes starting with substring
+    /// @return positions of suffixes starting with substring
 
     /// Time complexity O(M*log(N)), where:
     /// M - @param str length, N - text length.
@@ -155,8 +155,7 @@ public:
     {
     }
 
-    /// Lengths of the longest common prefixes between all pairs of
-    /// consecutive non-empty suffixes, in lexicographic order.
+    /// Lengths of the longest common prefixes of adjacent suffixes.
     const Size* longest_common_prefixes() const { return lcp_.data(); }
 
 private:
