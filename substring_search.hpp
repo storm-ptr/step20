@@ -23,10 +23,7 @@ auto find_any(const suffix_array<Ts...>& array, R&& str)
     return std::nullopt;
 }
 
-/// Find all occurrences of @param str
-
-/// Time complexity O(N) at worst, where:
-/// N - @param array text length.
+/// Find all occurrences of the substring.
 template <class... Ts, std::ranges::forward_range R>
 auto find_all(const suffix_array<Ts...>& array, R&& str)
     -> generator<typename suffix_array<Ts...>::size_type>

@@ -130,17 +130,17 @@ public:
         auto eq = equivalence_fn(this->comp());
         for (Size i = 0; i < this->size(); ++i)
             inverse[this->sorted_suffixes()[i]] = i;
-        for (Size pos = 0, lcp = 0; pos < this->size(); ++pos, lcp -= !!lcp) {
-            Size cur = inverse[pos];
+        for (Size i = 0, lcp = 0; i < this->size(); ++i, lcp -= !!lcp) {
+            Size cur = inverse[i];
             Size next = cur + 1;
             if (next < this->size()) {
                 auto diff = std::mismatch(
-                    this->data() + pos + lcp,
+                    this->data() + i + lcp,
                     this->data() + this->size(),
                     this->data() + this->sorted_suffixes()[next] + lcp,
                     this->data() + this->size(),
                     eq);
-                lcp = std::distance(this->data() + pos, diff.first);
+                lcp = std::distance(this->data() + i, diff.first);
             }
             else
                 lcp = 0;
@@ -155,7 +155,7 @@ public:
     {
     }
 
-    /// Lengths of the longest common prefixes of adjacent suffixes.
+    /// Lengths of the longest common prefixes of adjacent sorted suffixes.
     const Size* longest_common_prefixes() const { return lcp_.data(); }
 
 private:
