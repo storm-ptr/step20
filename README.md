@@ -13,7 +13,7 @@ Step20 is a C++20, header-only library of STL-like algorithms and data structure
 
 * [edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance):
   [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L134-L141)
-* [longest common subsequence</summary>](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem):
+* [longest common subsequence](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem):
   [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L299-L303),
   [example](https://github.com/storm-ptr/step20/blob/main/example/diff/diff.hpp#L48-L67)
 * [longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring_problem):
