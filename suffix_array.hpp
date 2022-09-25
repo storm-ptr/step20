@@ -111,8 +111,10 @@ private:
     };
 };
 
-template <std::ranges::input_range R>
-suffix_array(R) -> suffix_array<std::ranges::range_value_t<R>>;
+template <std::ranges::input_range R,
+          class Compare = std::less<std::ranges::range_value_t<R>>>
+suffix_array(R, Compare = {})
+    -> suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
 
 /// Kasai's algorithm for constructing longest common prefix array.
 
@@ -162,9 +164,10 @@ private:
     std::vector<Size> lcp_;
 };
 
-template <std::ranges::input_range R>
-enhanced_suffix_array(R)
-    -> enhanced_suffix_array<std::ranges::range_value_t<R>>;
+template <std::ranges::input_range R,
+          class Compare = std::less<std::ranges::range_value_t<R>>>
+enhanced_suffix_array(R, Compare = {})
+    -> enhanced_suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
 
 }  // namespace step20
 

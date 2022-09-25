@@ -1,3 +1,5 @@
+// Andrew Naplavkov
+
 #ifndef STEP20_GENERATOR_HPP
 #define STEP20_GENERATOR_HPP
 

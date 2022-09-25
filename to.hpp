@@ -10,7 +10,7 @@ namespace step20 {
 
 /// @see wg21.link/p1206
 template <class To, std::ranges::input_range From>
-auto to(From&& from)
+To to(From&& from)
 {
     auto result = To{};
     if constexpr (requires { result.reserve(std::ranges::size(from)); })
