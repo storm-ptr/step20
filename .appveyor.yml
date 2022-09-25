@@ -1,5 +1,6 @@
 image:
   - Visual Studio 2022
+  - Ubuntu2004
 
 platform: x64
 
@@ -15,6 +16,8 @@ build_script:
   - cmd: msvc.bat
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/example/suffix_tree_viz
   - cmd: msvc.bat
+  - sh: cd %APPVEYOR_BUILD_FOLDER%
+  - sh: doxygen Doxyfile
 
 test_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/test
