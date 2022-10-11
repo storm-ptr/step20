@@ -30,10 +30,10 @@ auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
 
 /// @return the longest substring that occurs at least twice.
 
-/// @param tree must be explicit - padded with a terminal symbol.
+/// Tree must be explicit - padded with a terminal symbol.
 /// Time complexity O(N),
 /// space complexity asymptotically close to O(log(N)), O(N) at worst,
-/// where: N - of text length.
+/// where: N - @param tree text length.
 template <class... Ts>
 auto longest_repeated_substring(const suffix_tree<Ts...>& tree)
     -> std::basic_string_view<typename suffix_tree<Ts...>::value_type>
