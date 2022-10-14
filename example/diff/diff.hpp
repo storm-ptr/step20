@@ -25,21 +25,22 @@ inline lines_t to_lines(std::string_view txt)
         }));
 }
 
-inline pair_t partition(range_t range, std::string_view separator)
+inline pair_t split(range_t r, std::string_view pattern)
 {
-    auto it = std::ranges::find(range, separator);
-    return {{range.begin(), it}, {std::next(it), range.end()}};
+    auto it = std::ranges::find(r, pattern);
+    return {{r.begin(), it}, {std::next(it), r.end()}};
 }
 
-inline generator<pair_t> zip_partition(pair_t pair, range_t separators)
+inline generator<pair_t> zip_split(range_t r1, range_t r2, range_t patterns)
 {
-    for (auto separator : separators) {
-        auto [head1, tail1] = partition(pair.first, separator);
-        auto [head2, tail2] = partition(pair.second, separator);
+    for (auto pattern : patterns) {
+        auto [head1, tail1] = split(r1, pattern);
+        auto [head2, tail2] = split(r2, pattern);
         co_yield {head1, head2};
-        pair = {tail1, tail2};
+        r1 = tail1;
+        r2 = tail2;
     }
-    co_yield pair;
+    co_yield {r1, r2};
 }
 
 }  // namespace detail
@@ -49,19 +50,18 @@ inline void dump(std::string_view txt1, std::string_view txt2, std::ostream& os)
 {
     auto lines1 = detail::to_lines(txt1);
     auto lines2 = detail::to_lines(txt2);
-    auto separators = detail::lines_t{};
+    auto patterns = detail::lines_t{};
     longest_common_subsequence::copy(
-        lines1, lines2, std::back_inserter(separators));
-    for (auto hunk : detail::zip_partition({lines1, lines2}, separators)) {
-        if (hunk.first.empty() && hunk.second.empty())
+        lines1, lines2, std::back_inserter(patterns));
+    for (auto [r1, r2] : detail::zip_split(lines1, lines2, patterns)) {
+        if (r1.empty() && r2.empty())
             continue;
-        os << "@@ -" << (hunk.first.begin() - lines1.begin() + 1) << ","
-           << hunk.first.size() << " +"
-           << (hunk.second.begin() - lines2.begin() + 1) << ","
-           << hunk.second.size() << " @@\n";
-        for (auto line : hunk.first)
+        os << "@@ -" << (r1.begin() - lines1.begin() + 1) << "," << r1.size()
+           << " +" << (r2.begin() - lines2.begin() + 1) << "," << r2.size()
+           << " @@\n";
+        for (auto line : r1)
             os << "-" << line << "\n";
-        for (auto line : hunk.second)
+        for (auto line : r2)
             os << "+" << line << "\n";
     }
 }
