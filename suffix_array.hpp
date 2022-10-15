@@ -142,7 +142,7 @@ public:
                     this->data() + this->sorted_suffixes()[next] + lcp,
                     this->data() + this->size(),
                     eq);
-                lcp = std::distance(this->data() + i, diff.first);
+                lcp = diff.first - (this->data() + i);
             }
             else
                 lcp = 0;

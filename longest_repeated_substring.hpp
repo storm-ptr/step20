@@ -22,7 +22,7 @@ auto longest_repeated_substring(const enhanced_suffix_array<Ts...>& array)
     auto lcp = std::span{array.longest_common_prefixes(), array.size()};
     auto max = std::ranges::max_element(lcp);
     if (max != lcp.end() && *max > 0) {
-        auto pos = array.sorted_suffixes()[std::distance(lcp.begin(), max)];
+        auto pos = array.sorted_suffixes()[max - lcp.begin()];
         result = std::basic_string_view{first + pos, first + pos + *max};
     }
     return result;

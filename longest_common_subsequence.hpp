@@ -17,11 +17,11 @@ struct table {
     template <std::random_access_iterator I1, std::random_access_iterator I2>
     auto last_row(I1 first1, I1 last1, I2 first2, I2 last2) const
     {
-        size_t size1 = std::ranges::distance(first1, last1);
-        size_t size2 = std::ranges::distance(first2, last2);
-        auto tbl = ring_table<intmax_t, 2>(size2 + 1);
-        for (size_t l = 1; l <= size1; ++l)
-            for (size_t r = 1; r <= size2; ++r)
+        auto size1 = last1 - first1;
+        auto size2 = last2 - first2;
+        auto tbl = ring_table<uintmax_t, 2>(size2 + 1);
+        for (decltype(size1) l = 1; l <= size1; ++l)
+            for (decltype(size2) r = 1; r <= size2; ++r)
                 tbl[l][r] = eq(first1[l - 1], first2[r - 1])
                                 ? tbl[l - 1][r - 1] + 1
                                 : std::max(tbl[l - 1][r], tbl[l][r - 1]);
