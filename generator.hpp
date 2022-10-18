@@ -18,9 +18,9 @@ inline auto co_destroy = [](void* address) {
 template <std::movable T>
 struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
     struct promise_type : std::optional<T> {
-        static std::suspend_never initial_suspend() noexcept { return {}; }
-        static std::suspend_always final_suspend() noexcept { return {}; }
-        [[noreturn]] static void unhandled_exception() { throw; }
+        std::suspend_never initial_suspend() noexcept { return {}; }
+        std::suspend_always final_suspend() noexcept { return {}; }
+        void unhandled_exception() { throw; }
         void return_void() {}
         void await_transform() = delete;
 
@@ -45,9 +45,9 @@ struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
         using difference_type = std::ptrdiff_t;
         using value_type = T;
         using reference = const T&;
-        iterator() = default;
-        iterator(const co_handle& fn) : co_handle{fn} {}
+        explicit iterator(const co_handle& fn) : co_handle{fn} {}
         reference operator*() const { return *this->promise(); }
+        bool operator==(std::default_sentinel_t) const { return this->done(); }
 
         iterator& operator++()
         {
@@ -62,15 +62,10 @@ struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
             this->promise() = std::move(unchanged_value);
             return *this;
         }
-
-        friend bool operator==(const iterator& lhs, const iterator& rhs)
-        {
-            return (!lhs || lhs.done()) && (!rhs || rhs.done());
-        };
     };
 
-    iterator begin() const { return co_handle::from_address(get()); }
-    iterator end() const { return {}; }
+    auto begin() const { return iterator{co_handle::from_address(get())}; }
+    auto end() const { return std::default_sentinel; }
 };
 
 }  // namespace step20
