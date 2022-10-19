@@ -11,7 +11,7 @@
 
 namespace step20 {
 
-// @see https://graphviz.org/
+/// @see https://graphviz.org/
 struct suffix_tree_viz : suffix_tree<char, uint32_t, std::map<char, uint32_t>> {
     friend std::ostream& operator<<(std::ostream& os, const suffix_tree_viz& me)
     {
@@ -22,7 +22,7 @@ struct suffix_tree_viz : suffix_tree<char, uint32_t, std::map<char, uint32_t>> {
         };
         os << "digraph \"" << std::string_view(me.data(), me.size())
            << "\" {\nrankdir=LR\n";
-        if (auto start = me.branch(std::string_view{}))
+        if (auto start = me.find(std::string_view{}))
             for (auto edge : me.depth_first_search(*start)) {
                 child_node_viz(edge);
                 os << " [shape="

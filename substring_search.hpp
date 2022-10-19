@@ -11,26 +11,26 @@ namespace step20::substring_search {
 /// Find substring offset.
 
 /// Time complexity O(M*log(N)), where:
-/// M - @param str length, N - @param array text length.
+/// M - @param str length, N - @param arr text length.
 template <class... Ts, std::ranges::forward_range R>
-auto find_any(const suffix_array<Ts...>& array, R&& str)
+auto find_any(const suffix_array<Ts...>& arr, R&& str)
     -> std::optional<typename suffix_array<Ts...>::size_type>
 {
     if (std::ranges::empty(str))
-        return array.size();
-    for (auto pos : array.equal_range(str))
+        return arr.size();
+    for (auto pos : arr.find(str))
         return pos;
     return std::nullopt;
 }
 
 /// Find all occurrences of the substring.
 template <class... Ts, std::ranges::forward_range R>
-auto find_all(const suffix_array<Ts...>& array, R&& str)
+auto find_all(const suffix_array<Ts...>& arr, R&& str)
     -> generator<typename suffix_array<Ts...>::size_type>
 {
     if (std::ranges::empty(str))
-        co_yield array.size();
-    for (auto pos : array.equal_range(str))
+        co_yield arr.size();
+    for (auto pos : arr.find(str))
         co_yield pos;
 }
 
@@ -41,7 +41,7 @@ template <class... Ts, std::ranges::forward_range R>
 auto find_first(const suffix_tree<Ts...>& tree, R&& str)
     -> std::optional<typename suffix_tree<Ts...>::size_type>
 {
-    if (auto edge = tree.branch(str))
+    if (auto edge = tree.find(str))
         return tree.labels(*edge).first;
     return std::ranges::empty(str) ? std::optional{0} : std::nullopt;
 }
@@ -57,7 +57,7 @@ auto find_all(const suffix_tree<Ts...>& tree, R&& str)
 {
     if (std::ranges::empty(str))
         co_yield tree.size();
-    if (auto start = tree.branch(str))
+    if (auto start = tree.find(str))
         for (auto edge : tree.depth_first_search(*start))
             if (tree.leaf(edge.child_node))
                 co_yield tree.labels(edge).first;

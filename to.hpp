@@ -8,7 +8,7 @@
 
 namespace step20 {
 
-/// @see wg21.link/p1206
+/// @see https://en.cppreference.com/w/cpp/ranges/to
 template <class To, std::ranges::input_range From>
 To to(From&& from)
 {

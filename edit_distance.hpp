@@ -50,7 +50,8 @@ struct table {
                 return std::pair{lhs, rhs};
         };
         while (first1 != last1) {
-            if (first2 == last2 || first1 + 1 != last1 && !eq(*first1, *first2))
+            if (first2 == last2 ||
+                (first1 + 1 != last1 && !eq(*first1, *first2)))
                 *result++ = make_pair(*first1++, std::nullopt);
             else
                 *result++ = make_pair(*first1++, *first2++);

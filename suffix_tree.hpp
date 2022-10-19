@@ -94,7 +94,7 @@ public:
     /// @return the minimum depth edge which labels start with substring
 
     /// Time complexity O(M), where: M - @param str length.
-    std::optional<edge_type> branch(std::ranges::forward_range auto&& str) const
+    std::optional<edge_type> find(std::ranges::forward_range auto&& str) const
     {
         if (nodes_.empty())
             return std::nullopt;
