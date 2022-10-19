@@ -1,0 +1,32 @@
+name: build
+on:
+  push:
+    branches: [ main ]
+jobs:
+  run-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - working-directory: ./example/diff
+        run: |
+          chmod u+x ./gcc.sh
+          ./gcc.sh
+      - working-directory: ./example/suffix_tree_viz
+        run: |
+          chmod u+x ./gcc.sh
+          ./gcc.sh
+      - working-directory: ./test
+        run: |
+          chmod u+x ./gcc.sh
+          ./gcc.sh
+  run-on-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ilammy/msvc-dev-cmd@v1
+      - working-directory: ./example/diff
+        run: Invoke-Expression ./msvc.bat
+      - working-directory: ./example/suffix_tree_viz
+        run: Invoke-Expression ./msvc.bat
+      - working-directory: ./test
+        run: Invoke-Expression ./msvc.bat

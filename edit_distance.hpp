@@ -50,7 +50,8 @@ struct table {
                 return std::pair{lhs, rhs};
         };
         while (first1 != last1) {
-            if (first2 == last2 || first1 + 1 != last1 && !eq(*first1, *first2))
+            if (first2 == last2 ||
+                (first1 + 1 != last1 && !eq(*first1, *first2)))
                 *result++ = make_pair(*first1++, std::nullopt);
             else
                 *result++ = make_pair(*first1++, *first2++);
@@ -68,10 +69,7 @@ struct table {
 /// insertions, replacements, deletions, and null actions needed
 /// to change one string into the other.
 /// Time complexity O(N*M), space complexity O(min(N,M)), where:
-/// N - @param r1 length
-/// M - @param r2 length
-/// @param result - the beginning of the destination range
-/// @param eq - to compare characters for equality
+/// N = std::ranges::distance(r1), M = std::ranges::distance(r2).
 template <std::ranges::random_access_range R1,
           std::ranges::random_access_range R2,
           std::weakly_incrementable O,

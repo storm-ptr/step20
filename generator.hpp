@@ -14,17 +14,17 @@ inline auto co_destroy = [](void* address) {
     std::coroutine_handle<>::from_address(address).destroy();
 };
 
-/// @see wg21.link/p2168
+/// @see https://en.cppreference.com/w/cpp/header/generator
 template <std::movable T>
 struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
     struct promise_type : std::optional<T> {
-        std::suspend_never initial_suspend() noexcept { return {}; }
-        std::suspend_always final_suspend() noexcept { return {}; }
-        void unhandled_exception() { throw; }
-        void return_void() {}
+        std::suspend_never initial_suspend() { return {}; }
         void await_transform() = delete;
+        void return_void() {}
+        void unhandled_exception() { throw; }
+        std::suspend_always final_suspend() noexcept { return {}; }
 
-        std::suspend_always yield_value(T value) noexcept
+        std::suspend_always yield_value(T value)
         {
             this->emplace(std::move(value));
             return {};
@@ -33,19 +33,19 @@ struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
         generator get_return_object()
         {
             auto result = generator{};
-            result.reset(co_handle::from_promise(*this).address());
+            result.reset(handle::from_promise(*this).address());
             return result;
         }
     };
 
-    using co_handle = std::coroutine_handle<promise_type>;
+    using handle = std::coroutine_handle<promise_type>;
 
-    struct iterator : private co_handle {
+    struct iterator : private handle {
         using iterator_category = std::input_iterator_tag;
         using difference_type = std::ptrdiff_t;
         using value_type = T;
         using reference = const T&;
-        explicit iterator(const co_handle& fn) : co_handle{fn} {}
+        explicit iterator(handle coro) : handle{coro} {}
         reference operator*() const { return *this->promise(); }
         bool operator==(std::default_sentinel_t) const { return this->done(); }
 
@@ -64,7 +64,7 @@ struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
         }
     };
 
-    auto begin() const { return iterator{co_handle::from_address(get())}; }
+    auto begin() const { return iterator{handle::from_address(get())}; }
     auto end() const { return std::default_sentinel; }
 };
 

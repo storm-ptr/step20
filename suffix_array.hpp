@@ -10,7 +10,7 @@
 
 namespace step20 {
 
-/// Manber's algorithm for constructing suffix array.
+/// Manber's algorithm for constructing sorted array of non-empty suffixes.
 
 /// Time complexity O(N*log(N)*log(N)), space complexity O(N), where:
 /// N - text length.
@@ -19,18 +19,19 @@ namespace step20 {
 /// @param Compare - to determine the order of characters.
 template <class Char,
           std::unsigned_integral Size = size_t,
-          class Compare = std::less<Char>>
+          class Compare = std::less<>>
 class suffix_array {
 public:
     using value_type = Char;
     using size_type = Size;
     const Char* data() const { return str_.data(); }
     Size size() const { return str_.size(); }
+    Size operator[](Size n) const { return pos_[n]; }  ///< suffix position
     const Compare& comp() const { return comp_; }
     virtual ~suffix_array() = default;
 
     explicit suffix_array(std::basic_string<Char> str, const Compare& comp = {})
-        : str_(std::move(str)), idx_(size()), comp_(comp)
+        : str_(std::move(str)), pos_(size()), comp_(comp)
     {
         auto sufs = std::vector<suffix>(size());
         auto gen = [i = Size{}]() mutable { return suffix{i++, {}}; };
@@ -43,25 +44,22 @@ public:
             fill_second_rank(sufs, offset);
             fill_first_rank(sufs, comp_rank);
         }
-        std::ranges::transform(sufs, idx_.begin(), &suffix::pos);
+        std::ranges::transform(sufs, pos_.begin(), &suffix::pos);
     }
 
-    explicit suffix_array(std::ranges::input_range auto&& str,
+    explicit suffix_array(std::ranges::input_range auto&& r,
                           const Compare& comp = {})
-        : suffix_array(to<std::basic_string>(str), comp)
+        : suffix_array(to<std::basic_string>(r), comp)
     {
     }
 
-    /// Starting positions of non-empty suffixes in lexicographic order.
-    const Size* sorted_suffixes() const { return idx_.data(); }
-
-    /// @return positions of suffixes starting with substring
+    /// Find positions of suffixes starting with substring.
 
     /// Time complexity O(M*log(N)), where:
-    /// M - @param str length, N - text length.
-    std::span<const Size> equal_range(std::ranges::input_range auto&& str) const
+    /// M - substring length, N - text length.
+    std::span<const Size> find(std::ranges::input_range auto&& str) const
     {
-        auto result = std::span{idx_};
+        auto result = std::span{pos_};
         auto first = std::ranges::begin(str);
         auto last = std::ranges::end(str);
         auto i = Size{};
@@ -74,7 +72,7 @@ public:
 
 private:
     std::basic_string<Char> str_;
-    std::vector<Size> idx_;
+    std::vector<Size> pos_;
     Compare comp_;
 
     struct suffix {
@@ -111,8 +109,7 @@ private:
     };
 };
 
-template <std::ranges::input_range R,
-          class Compare = std::less<std::ranges::range_value_t<R>>>
+template <std::ranges::input_range R, class Compare = std::less<>>
 suffix_array(R, Compare = {})
     -> suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
 
@@ -121,28 +118,29 @@ suffix_array(R, Compare = {})
 /// Time and space complexity O(N), where: N - text length.
 template <class Char,
           std::unsigned_integral Size = size_t,
-          class Compare = std::less<Char>>
+          class Compare = std::less<>>
 class enhanced_suffix_array : public suffix_array<Char, Size, Compare> {
+    std::vector<Size> lcp_;
+
 public:
-    explicit enhanced_suffix_array(suffix_array<Char, Size, Compare>&& array)
-        : suffix_array<Char, Size, Compare>(std::move(array))
-        , lcp_(this->size())
+    std::span<const Size> lcp_array() const { return lcp_; }
+
+    explicit enhanced_suffix_array(suffix_array<Char, Size, Compare>&& arr)
+        : suffix_array<Char, Size, Compare>(std::move(arr)), lcp_(this->size())
     {
-        auto inverse = std::vector<Size>(this->size());
-        auto eq = equivalence_fn(this->comp());
-        for (Size i = 0; i < this->size(); ++i)
-            inverse[this->sorted_suffixes()[i]] = i;
-        for (Size i = 0, lcp = 0; i < this->size(); ++i, lcp -= !!lcp) {
-            Size cur = inverse[i];
-            Size next = cur + 1;
-            if (next < this->size()) {
+        const auto& me = *this;
+        auto inv = std::vector<Size>(me.size());
+        for (Size i = 0; i < me.size(); ++i)
+            inv[me[i]] = i;
+        auto first = me.data();
+        auto last = first + me.size();
+        auto eq = equivalence_fn(me.comp());
+        for (Size i = 0, lcp = 0; i < me.size(); ++i, lcp -= !!lcp) {
+            Size cur = inv[i];
+            if (Size next = cur + 1; next < me.size()) {
                 auto diff = std::mismatch(
-                    this->data() + i + lcp,
-                    this->data() + this->size(),
-                    this->data() + this->sorted_suffixes()[next] + lcp,
-                    this->data() + this->size(),
-                    eq);
-                lcp = diff.first - (this->data() + i);
+                    first + i + lcp, last, first + me[next] + lcp, last, eq);
+                lcp = diff.first - (first + i);
             }
             else
                 lcp = 0;
@@ -151,21 +149,14 @@ public:
     }
 
     template <std::ranges::input_range R>
-    explicit enhanced_suffix_array(R&& str, const Compare& comp = {})
+    explicit enhanced_suffix_array(R&& r, const Compare& comp = {})
         : enhanced_suffix_array(
-              suffix_array<Char, Size, Compare>(std::forward<R>(str), comp))
+              suffix_array<Char, Size, Compare>(std::forward<R>(r), comp))
     {
     }
-
-    /// Lengths of the longest common prefixes of adjacent sorted suffixes.
-    const Size* longest_common_prefixes() const { return lcp_.data(); }
-
-private:
-    std::vector<Size> lcp_;
 };
 
-template <std::ranges::input_range R,
-          class Compare = std::less<std::ranges::range_value_t<R>>>
+template <std::ranges::input_range R, class Compare = std::less<>>
 enhanced_suffix_array(R, Compare = {})
     -> enhanced_suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
 
