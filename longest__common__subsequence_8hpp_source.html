@@ -122,25 +122,25 @@ $(function() {
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}  <span class="comment">// namespace detail</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">template</span> &lt;std::ranges::random_access_range R1,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>          std::ranges::random_access_range R2,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          std::weakly_incrementable O,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>          <span class="keyword">class </span>Equal = std::equal_to&lt;&gt;&gt;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">   62</a></span>O <a class="code hl_function" href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">copy</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Equal&amp; eq = {})</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table{eq},</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                             std::ranges::begin(r1),</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                             std::ranges::end(r1),</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                             std::ranges::begin(r2),</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                             std::ranges::end(r2),</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                             result);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}  <span class="comment">// namespace step20::longest_common_subsequence</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_LONGEST_COMMON_SUBSEQUENCE_HPP</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">template</span> &lt;std::ranges::random_access_range R1,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>          std::ranges::random_access_range R2,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>          std::weakly_incrementable O,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>          <span class="keyword">class </span>Equal = std::equal_to&lt;&gt;&gt;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">   59</a></span>O <a class="code hl_function" href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">copy</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Equal&amp; eq = {})</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table{eq},</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                             std::ranges::begin(r1),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                             std::ranges::end(r1),</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                             std::ranges::begin(r2),</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                             std::ranges::end(r2),</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                             result);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}  <span class="comment">// namespace step20::longest_common_subsequence</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_LONGEST_COMMON_SUBSEQUENCE_HPP</span></div>
 <div class="ttc" id="anamespacestep20_1_1longest__common__subsequence_html"><div class="ttname"><a href="namespacestep20_1_1longest__common__subsequence.html">step20::longest_common_subsequence</a></div><div class="ttdef"><b>Definition:</b> longest_common_subsequence.hpp:10</div></div>
-<div class="ttc" id="anamespacestep20_1_1longest__common__subsequence_html_a8eca8dbcb5b59cc84f78de054faf5dab"><div class="ttname"><a href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">step20::longest_common_subsequence::copy</a></div><div class="ttdeci">O copy(const R1 &amp;r1, const R2 &amp;r2, O result, const Equal &amp;eq={})</div><div class="ttdoc">Find the longest subsequence present in two sequences.</div><div class="ttdef"><b>Definition:</b> longest_common_subsequence.hpp:62</div></div>
+<div class="ttc" id="anamespacestep20_1_1longest__common__subsequence_html_a8eca8dbcb5b59cc84f78de054faf5dab"><div class="ttname"><a href="namespacestep20_1_1longest__common__subsequence.html#a8eca8dbcb5b59cc84f78de054faf5dab">step20::longest_common_subsequence::copy</a></div><div class="ttdeci">O copy(const R1 &amp;r1, const R2 &amp;r2, O result, const Equal &amp;eq={})</div><div class="ttdoc">Find the longest subsequence present in two sequences.</div><div class="ttdef"><b>Definition:</b> longest_common_subsequence.hpp:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

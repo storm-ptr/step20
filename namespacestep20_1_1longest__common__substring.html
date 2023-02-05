@@ -128,16 +128,7 @@ template&lt;std::ranges::input_range R1, std::ranges::input_range R2, std::weakl
 </div><div class="memdoc">
 
 <p>Find the longest substring of two strings. </p>
-<p>Substring is contiguous, while subsequence need not be. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classstep20_1_1enhanced__suffix__array.html" title="Kasai&#39;s algorithm for constructing longest common prefix array.">enhanced_suffix_array</a> is used under the hood. Time complexity O((N+M)*log(N+M)*log(N+M)), space complexity O(N+M), where: N -</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">r1</td><td>length M -</td></tr>
-    <tr><td class="paramname">r2</td><td>length </td></tr>
-    <tr><td class="paramname">result</td><td>- the beginning of the destination range </td></tr>
-    <tr><td class="paramname">comp</td><td>- to determine the order of characters </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Substring is contiguous, while subsequence need not be. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classstep20_1_1enhanced__suffix__array.html" title="Kasai&#39;s algorithm for constructing longest common prefix array.">enhanced_suffix_array</a> is used under the hood. Time complexity O((N+M)*log(N+M)*log(N+M)), space complexity O(N+M), where: N = std::ranges::distance(r1), M = std::ranges::distance(r2). </dd></dl>
 
 </div>
 </div>

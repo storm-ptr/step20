@@ -121,6 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afe58e63102cbc284b71046110ca24cf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#afe58e63102cbc284b71046110ca24cf5">suffix_array</a> (std::ranges::input_range auto &amp;&amp;r, const Compare &amp;<a class="el" href="classstep20_1_1suffix__array.html#a9724f18e699e969a0376d3de53048285">comp</a>={})</td></tr>
 <tr class="separator:afe58e63102cbc284b71046110ca24cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae79bfc3bb427edc2ceb757391f2a3347"><td class="memItemLeft" align="right" valign="top">std::span&lt; const Size &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#ae79bfc3bb427edc2ceb757391f2a3347">find</a> (std::ranges::input_range auto &amp;&amp;str) const</td></tr>
+<tr class="memdesc:ae79bfc3bb427edc2ceb757391f2a3347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find positions of suffixes starting with substring.  <br /></td></tr>
 <tr class="separator:ae79bfc3bb427edc2ceb757391f2a3347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -351,13 +352,9 @@ template&lt;class Char , std::unsigned_integral Size = size_t, class Compare  = 
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>positions of suffixes starting with substring Time complexity O(M*log(N)), where: M -</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>length, N - text length. </td></tr>
-  </table>
-  </dd>
-</dl>
+
+<p>Find positions of suffixes starting with substring. </p>
+<p>Time complexity O(M*log(N)), where: M - substring length, N - text length. </p>
 
 </div>
 </div>

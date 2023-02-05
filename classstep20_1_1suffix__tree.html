@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67e326a45552cdc78e9a406c6a5a684b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstep20_1_1suffix__tree_1_1slice__type.html">slice_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__tree.html#a67e326a45552cdc78e9a406c6a5a684b">labels</a> (const <a class="el" href="structstep20_1_1suffix__tree_1_1edge__type.html">edge_type</a> &amp;edge) const</td></tr>
 <tr class="separator:a67e326a45552cdc78e9a406c6a5a684b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f6b8314bad2315e809c90c817ca443f"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structstep20_1_1suffix__tree_1_1edge__type.html">edge_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__tree.html#a7f6b8314bad2315e809c90c817ca443f">find</a> (std::ranges::forward_range auto &amp;&amp;str) const</td></tr>
-<tr class="memdesc:a7f6b8314bad2315e809c90c817ca443f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time complexity O(M), where: M -.  <br /></td></tr>
+<tr class="memdesc:a7f6b8314bad2315e809c90c817ca443f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the minimum depth edge which labels start with substring.  <br /></td></tr>
 <tr class="separator:a7f6b8314bad2315e809c90c817ca443f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13a071214ae0bda9b555c5ba213374a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstep20_1_1generator.html">generator</a>&lt; <a class="el" href="structstep20_1_1suffix__tree_1_1edge__type.html">edge_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__tree.html#a13a071214ae0bda9b555c5ba213374a3">depth_first_search</a> (const <a class="el" href="structstep20_1_1suffix__tree_1_1edge__type.html">edge_type</a> &amp;start) const</td></tr>
 <tr class="separator:a13a071214ae0bda9b555c5ba213374a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -308,14 +308,8 @@ template&lt;class Char , std::unsigned_integral Size = size_t, class Map  = std:
 </table>
 </div><div class="memdoc">
 
-<p>Time complexity O(M), where: M -. </p>
-<dl class="section return"><dt>Returns</dt><dd>the minimum depth edge which labels start with substring</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>length. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Find the minimum depth edge which labels start with substring. </p>
+<p>Time complexity O(M), where: M - substring length. </p>
 
 </div>
 </div>

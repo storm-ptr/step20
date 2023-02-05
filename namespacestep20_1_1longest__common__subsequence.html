@@ -128,15 +128,7 @@ template&lt;std::ranges::random_access_range R1, std::ranges::random_access_rang
 </div><div class="memdoc">
 
 <p>Find the longest subsequence present in two sequences. </p>
-<p>Substring is contiguous, while subsequence need not be. Time complexity O(N*M), space complexity O(min(N,M)), where: N -</p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">r1</td><td>length M -</td></tr>
-    <tr><td class="paramname">r2</td><td>length </td></tr>
-    <tr><td class="paramname">result</td><td>- the beginning of the destination range </td></tr>
-    <tr><td class="paramname">eq</td><td>- to compare characters for equality </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Substring is contiguous, while subsequence need not be. Time complexity O(N*M), space complexity O(min(N,M)), where: N = std::ranges::distance(r1), M = std::ranges::distance(r2). </p>
 
 </div>
 </div>

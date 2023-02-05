@@ -137,25 +137,25 @@ $(function() {
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace detail</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">template</span> &lt;std::ranges::random_access_range R1,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>          std::ranges::random_access_range R2,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>          std::weakly_incrementable O,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>          <span class="keyword">class </span>Equal = std::equal_to&lt;&gt;&gt;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">   80</a></span>O <a class="code hl_function" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">zip</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Equal&amp; eq = {})</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>{</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table{eq},</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                             std::ranges::begin(r1),</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                             std::ranges::end(r1),</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                             std::ranges::begin(r2),</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                             std::ranges::end(r2),</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                             result);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}  <span class="comment">// namespace step20::edit_distance</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_EDIT_DISTANCE_HPP</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">template</span> &lt;std::ranges::random_access_range R1,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>          std::ranges::random_access_range R2,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>          std::weakly_incrementable O,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>          <span class="keyword">class </span>Equal = std::equal_to&lt;&gt;&gt;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">   77</a></span>O <a class="code hl_function" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">zip</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Equal&amp; eq = {})</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table{eq},</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                             std::ranges::begin(r1),</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                             std::ranges::end(r1),</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                             std::ranges::begin(r2),</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                             std::ranges::end(r2),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                             result);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}  <span class="comment">// namespace step20::edit_distance</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_EDIT_DISTANCE_HPP</span></div>
 <div class="ttc" id="anamespacestep20_1_1edit__distance_html"><div class="ttname"><a href="namespacestep20_1_1edit__distance.html">step20::edit_distance</a></div><div class="ttdef"><b>Definition:</b> edit_distance.hpp:11</div></div>
-<div class="ttc" id="anamespacestep20_1_1edit__distance_html_a0d3fa0d25f19e66cb3297fc98db5a1e3"><div class="ttname"><a href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">step20::edit_distance::zip</a></div><div class="ttdeci">O zip(const R1 &amp;r1, const R2 &amp;r2, O result, const Equal &amp;eq={})</div><div class="ttdoc">Find the optimal sequence alignment between two strings.</div><div class="ttdef"><b>Definition:</b> edit_distance.hpp:80</div></div>
+<div class="ttc" id="anamespacestep20_1_1edit__distance_html_a0d3fa0d25f19e66cb3297fc98db5a1e3"><div class="ttname"><a href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">step20::edit_distance::zip</a></div><div class="ttdeci">O zip(const R1 &amp;r1, const R2 &amp;r2, O result, const Equal &amp;eq={})</div><div class="ttdoc">Find the optimal sequence alignment between two strings.</div><div class="ttdef"><b>Definition:</b> edit_distance.hpp:77</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

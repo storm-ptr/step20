@@ -110,34 +110,34 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}  <span class="comment">// namespace detail</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">template</span> &lt;std::ranges::input_range R1,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>          std::ranges::input_range R2,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>          std::weakly_incrementable O,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>          <span class="keyword">class </span>Compare = std::less&lt;&gt;&gt;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">   51</a></span>O <a class="code hl_function" href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">copy</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Compare&amp; comp = {})</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>{</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">using </span>char_t = std::common_type_t&lt;std::ranges::range_value_t&lt;R1&gt;,</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                                      std::ranges::range_value_t&lt;R2&gt;&gt;;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">auto</span> str = std::basic_string&lt;char_t&gt;{};</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    str.append(std::ranges::begin(r1), std::ranges::end(r1));</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">auto</span> mid = str.size();</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    str.append(std::ranges::begin(r2), std::ranges::end(r2));</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint8_t&gt;::max())</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint8_t)mid, comp, result);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint16_t&gt;::max())</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint16_t)mid, comp, result);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint32_t&gt;::max())</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint32_t)mid, comp, result);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> detail::copy(std::move(str), mid, comp, result);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}  <span class="comment">// namespace step20::longest_common_substring</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_LONGEST_COMMON_SUBSTRING_HPP</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;std::ranges::input_range R1,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>          std::ranges::input_range R2,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>          std::weakly_incrementable O,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>          <span class="keyword">class </span>Compare = std::less&lt;&gt;&gt;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">   48</a></span>O <a class="code hl_function" href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">copy</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Compare&amp; comp = {})</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">using </span>char_t = std::common_type_t&lt;std::ranges::range_value_t&lt;R1&gt;,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                                      std::ranges::range_value_t&lt;R2&gt;&gt;;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">auto</span> str = std::basic_string&lt;char_t&gt;{};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    str.append(std::ranges::begin(r1), std::ranges::end(r1));</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">auto</span> mid = str.size();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    str.append(std::ranges::begin(r2), std::ranges::end(r2));</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint8_t&gt;::max())</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint8_t)mid, comp, result);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint16_t&gt;::max())</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint16_t)mid, comp, result);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (str.size() &lt; std::numeric_limits&lt;uint32_t&gt;::max())</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> detail::copy(std::move(str), (uint32_t)mid, comp, result);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> detail::copy(std::move(str), mid, comp, result);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}  <span class="comment">// namespace step20::longest_common_substring</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_LONGEST_COMMON_SUBSTRING_HPP</span></div>
 <div class="ttc" id="aclassstep20_1_1enhanced__suffix__array_html"><div class="ttname"><a href="classstep20_1_1enhanced__suffix__array.html">step20::enhanced_suffix_array</a></div><div class="ttdoc">Kasai's algorithm for constructing longest common prefix array.</div><div class="ttdef"><b>Definition:</b> suffix_array.hpp:122</div></div>
 <div class="ttc" id="aclassstep20_1_1suffix__array_html_ab76603fdc89be18e53a8dd9ad38d79a9"><div class="ttname"><a href="classstep20_1_1suffix__array.html#ab76603fdc89be18e53a8dd9ad38d79a9">step20::suffix_array::data</a></div><div class="ttdeci">const Char * data() const</div><div class="ttdef"><b>Definition:</b> suffix_array.hpp:27</div></div>
 <div class="ttc" id="anamespacestep20_1_1longest__common__substring_html"><div class="ttname"><a href="namespacestep20_1_1longest__common__substring.html">step20::longest_common_substring</a></div><div class="ttdef"><b>Definition:</b> longest_common_substring.hpp:9</div></div>
-<div class="ttc" id="anamespacestep20_1_1longest__common__substring_html_a98ec271555c59680fe0d092802cc53d0"><div class="ttname"><a href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">step20::longest_common_substring::copy</a></div><div class="ttdeci">O copy(const R1 &amp;r1, const R2 &amp;r2, O result, const Compare &amp;comp={})</div><div class="ttdoc">Find the longest substring of two strings.</div><div class="ttdef"><b>Definition:</b> longest_common_substring.hpp:51</div></div>
+<div class="ttc" id="anamespacestep20_1_1longest__common__substring_html_a98ec271555c59680fe0d092802cc53d0"><div class="ttname"><a href="namespacestep20_1_1longest__common__substring.html#a98ec271555c59680fe0d092802cc53d0">step20::longest_common_substring::copy</a></div><div class="ttdeci">O copy(const R1 &amp;r1, const R2 &amp;r2, O result, const Compare &amp;comp={})</div><div class="ttdoc">Find the longest substring of two strings.</div><div class="ttdef"><b>Definition:</b> longest_common_substring.hpp:48</div></div>
 <div class="ttc" id="asuffix__array_8hpp_html"><div class="ttname"><a href="suffix__array_8hpp.html">suffix_array.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

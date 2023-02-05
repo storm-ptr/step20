@@ -107,9 +107,11 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a6d7994b1d08adc856cb4b042489ebc50"><td class="memTemplParams" colspan="2">template&lt;class... Ts&gt; </td></tr>
 <tr class="memitem:a6d7994b1d08adc856cb4b042489ebc50"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacestep20.html#a6d7994b1d08adc856cb4b042489ebc50">longest_repeated_substring</a> (const <a class="el" href="classstep20_1_1enhanced__suffix__array.html">enhanced_suffix_array</a>&lt; Ts... &gt; &amp;arr) -&gt; std::basic_string_view&lt; typename <a class="el" href="classstep20_1_1enhanced__suffix__array.html">enhanced_suffix_array</a>&lt; Ts... &gt;::value_type &gt;</td></tr>
+<tr class="memdesc:a6d7994b1d08adc856cb4b042489ebc50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the longest substring that occurs at least twice.  <br /></td></tr>
 <tr class="separator:a6d7994b1d08adc856cb4b042489ebc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2de0e1fedb95ebab69857d46f21c870b"><td class="memTemplParams" colspan="2">template&lt;class... Ts&gt; </td></tr>
 <tr class="memitem:a2de0e1fedb95ebab69857d46f21c870b"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacestep20.html#a2de0e1fedb95ebab69857d46f21c870b">longest_repeated_substring</a> (const <a class="el" href="classstep20_1_1suffix__tree.html">suffix_tree</a>&lt; Ts... &gt; &amp;tree) -&gt; std::basic_string_view&lt; typename <a class="el" href="classstep20_1_1suffix__tree.html">suffix_tree</a>&lt; Ts... &gt;::value_type &gt;</td></tr>
+<tr class="memdesc:a2de0e1fedb95ebab69857d46f21c870b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the longest substring that occurs at least twice.  <br /></td></tr>
 <tr class="separator:a2de0e1fedb95ebab69857d46f21c870b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2533fe45e7b57c73e3c7cf70e1d71efb"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R, class Compare  = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:a2533fe45e7b57c73e3c7cf70e1d71efb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacestep20.html#a2533fe45e7b57c73e3c7cf70e1d71efb">suffix_array</a> (R, Compare={}) -&gt; <a class="el" href="classstep20_1_1suffix__array.html">suffix_array</a>&lt; std::ranges::range_value_t&lt; R &gt;, size_t, Compare &gt;</td></tr>
@@ -178,13 +180,9 @@ template&lt;class... Ts&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the longest substring that occurs at least twice. Substring is contiguous, while subsequence need not be. Time complexity O(N), where: N -</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">arr</td><td>text length. </td></tr>
-  </table>
-  </dd>
-</dl>
+
+<p>Find the longest substring that occurs at least twice. </p>
+<p>Substring is contiguous, while subsequence need not be. Time complexity O(N), where: N - text length. </p>
 
 </div>
 </div>
@@ -206,13 +204,9 @@ template&lt;class... Ts&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the longest substring that occurs at least twice. Tree must be explicit - padded with a terminal symbol. Time complexity O(N), space complexity asymptotically close to O(log(N)), O(N) at worst, where: N -</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tree</td><td>text length. </td></tr>
-  </table>
-  </dd>
-</dl>
+
+<p>Find the longest substring that occurs at least twice. </p>
+<p>Tree must be explicit - padded with a terminal symbol. Time complexity O(N), space complexity asymptotically close to O(log(N)), O(N) at worst, where: N - text length. </p>
 
 </div>
 </div>
