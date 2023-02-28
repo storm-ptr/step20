@@ -13,7 +13,10 @@
 namespace step20 {
 
 template <bool B>
-constexpr auto lazy_static_assert = [] { static_assert(B); };
+void lazy_static_assert()
+{
+    static_assert(B);
+}
 
 template <std::unsigned_integral T>
 T flip(T n)
