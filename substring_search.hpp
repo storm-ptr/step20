@@ -12,8 +12,9 @@ namespace step20::substring_search {
 
 /// Time complexity O(M*log(N)), where:
 /// M - substring length, N - text length.
-template <class... Ts, std::ranges::forward_range R>
-auto find_any(const suffix_array<Ts...>& arr, R&& str)
+template <class... Ts>
+auto find_any(const suffix_array<Ts...>& arr,
+              std::ranges::forward_range auto&& str)
     -> std::optional<typename suffix_array<Ts...>::size_type>
 {
     if (std::ranges::empty(str))
@@ -24,8 +25,9 @@ auto find_any(const suffix_array<Ts...>& arr, R&& str)
 }
 
 /// Find all occurrences of the substring.
-template <class... Ts, std::ranges::forward_range R>
-auto find_all(const suffix_array<Ts...>& arr, R&& str)
+template <class... Ts>
+auto find_all(const suffix_array<Ts...>& arr,
+              std::basic_string<typename suffix_array<Ts...>::value_type> str)
     -> generator<typename suffix_array<Ts...>::size_type>
 {
     if (std::ranges::empty(str))
@@ -37,8 +39,9 @@ auto find_all(const suffix_array<Ts...>& arr, R&& str)
 /// Find offset of the first occurrence of the substring.
 
 /// Time complexity O(M), where: M - substring length.
-template <class... Ts, std::ranges::forward_range R>
-auto find_first(const suffix_tree<Ts...>& tree, R&& str)
+template <class... Ts>
+auto find_first(const suffix_tree<Ts...>& tree,
+                std::ranges::forward_range auto&& str)
     -> std::optional<typename suffix_tree<Ts...>::size_type>
 {
     if (auto edge = tree.find(str))
@@ -51,8 +54,9 @@ auto find_first(const suffix_tree<Ts...>& tree, R&& str)
 /// Suffix tree must be explicit - padded with a terminal symbol.
 /// Space complexity asymptotically close to O(log(N)), O(N) at worst,
 /// where: N - text length.
-template <class... Ts, std::ranges::forward_range R>
-auto find_all(const suffix_tree<Ts...>& tree, R&& str)
+template <class... Ts>
+auto find_all(const suffix_tree<Ts...>& tree,
+              std::basic_string<typename suffix_tree<Ts...>::value_type> str)
     -> generator<typename suffix_tree<Ts...>::size_type>
 {
     if (std::ranges::empty(str))

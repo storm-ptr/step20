@@ -47,9 +47,9 @@ public:
         std::ranges::transform(sufs, pos_.begin(), &suffix::pos);
     }
 
-    explicit suffix_array(std::ranges::input_range auto&& r,
-                          const Compare& comp = {})
-        : suffix_array(to<std::basic_string>(r), comp)
+    template <std::ranges::input_range R>
+    explicit suffix_array(R&& r, const Compare& comp = {})
+        : suffix_array(to<std::basic_string>(std::forward<R>(r)), comp)
     {
     }
 

@@ -423,7 +423,9 @@ void test_substring_search()
         else
             check(std::ranges::empty(expect));
         check(std::ranges::is_permutation(
-            expect, to<std::vector>(substring_search::find_all(arr, substr))));
+            expect,
+            to<std::vector>(
+                substring_search::find_all(arr, std::string{substr}))));
         auto tree = to<suffix_tree>(str);
         check(substring_search::find_first(tree, str) == 0);
         check(substring_search::find_first(tree, ""sv) == 0);
@@ -433,7 +435,9 @@ void test_substring_search()
         else
             check(std::ranges::empty(expect));
         check(std::ranges::is_permutation(
-            expect, to<std::vector>(substring_search::find_all(tree, substr))));
+            expect,
+            to<std::vector>(
+                substring_search::find_all(tree, std::string{substr}))));
     }
 }
 

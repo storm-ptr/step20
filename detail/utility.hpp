@@ -52,7 +52,7 @@ auto try_reverse(std::ranges::borrowed_range auto&& range)
 }
 
 template <class Container>
-class insert_iterator {
+class emplace_iterator {
     Container* c_;
 
 public:
@@ -60,20 +60,20 @@ public:
     using difference_type = std::ptrdiff_t;
     using value_type = void;
     using reference = void;
-    explicit constexpr insert_iterator(Container& c) : c_(std::addressof(c)) {}
-    constexpr insert_iterator& operator*() { return *this; }
-    constexpr insert_iterator& operator++() { return *this; }
-    constexpr insert_iterator operator++(int) { return *this; }
+    explicit constexpr emplace_iterator(Container& c) : c_(std::addressof(c)) {}
+    constexpr emplace_iterator& operator*() { return *this; }
+    constexpr emplace_iterator& operator++() { return *this; }
+    constexpr emplace_iterator operator++(int) { return *this; }
 
-    constexpr insert_iterator& operator=(
-        const typename Container::value_type& value)
+    template <class T>
+    constexpr emplace_iterator& operator=(T&& val)
     {
-        if constexpr (requires { c_->insert(value); })
-            c_->insert(value);
-        else if constexpr (requires { c_->push(value); })
-            c_->push(value);
-        else if constexpr (requires { c_->push_back(value); })
-            c_->push_back(value);
+        if constexpr (requires { c_->emplace(std::forward<T>(val)); })
+            c_->emplace(std::forward<T>(val));
+        else if constexpr (requires { c_->emplace_back(std::forward<T>(val)); })
+            c_->emplace_back(std::forward<T>(val));
+        else if constexpr (requires { c_->push_back(std::forward<T>(val)); })
+            c_->push_back(std::forward<T>(val));  //< std::basic_string
         else
             lazy_static_assert<false>();
         return *this;

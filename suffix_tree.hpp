@@ -119,7 +119,7 @@ public:
 
     /// Space complexity asymptotically close to O(log(N)), O(N) at worst,
     /// where: N - text length.
-    generator<edge_type> depth_first_search(const edge_type& start) const
+    generator<edge_type> depth_first_search(edge_type start) const
     {
         for (auto stack = std::stack<edge_type>{{start}}; !stack.empty();) {
             auto edge = stack.top();
@@ -134,7 +134,7 @@ public:
                                 item.second,
                                 edge.labels_len + label(item.second).length()};
                         }),
-                    insert_iterator(stack));
+                    emplace_iterator(stack));
         }
     }
 

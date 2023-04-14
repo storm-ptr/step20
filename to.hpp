@@ -15,14 +15,14 @@ To to(From&& from)
     auto result = To{};
     if constexpr (requires { result.reserve(std::ranges::size(from)); })
         result.reserve(std::ranges::size(from));
-    std::ranges::copy(from, insert_iterator(result));
+    std::ranges::copy(from, emplace_iterator(result));
     return result;
 }
 
 template <template <class...> class To, std::ranges::input_range From>
 auto to(From&& from)
 {
-    return to<To<std::ranges::range_value_t<From>>>(from);
+    return to<To<std::ranges::range_value_t<From>>>(std::forward<From>(from));
 }
 
 }  // namespace step20
