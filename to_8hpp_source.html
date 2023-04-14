@@ -88,14 +88,14 @@ $(function() {
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">auto</span> result = To{};</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { result.reserve(std::ranges::size(from)); })</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        result.reserve(std::ranges::size(from));</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::ranges::copy(from, insert_iterator(result));</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::ranges::copy(from, emplace_iterator(result));</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">template</span> &lt;<span class="keyword">template</span> &lt;<span class="keyword">class</span>...&gt; <span class="keyword">class </span>To, std::ranges::input_range From&gt;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespacestep20.html#ad9be874153d2950b441dacfd9eb5d31a">   23</a></span><span class="keyword">auto</span> <a class="code hl_function" href="namespacestep20.html#af47f479f3240776c8f54f1a767d066f0">to</a>(From&amp;&amp; from)</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> to&lt;To&lt;std::ranges::range_value_t&lt;From&gt;&gt;&gt;(from);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> to&lt;To&lt;std::ranges::range_value_t&lt;From&gt;&gt;&gt;(std::forward&lt;From&gt;(from));</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}  <span class="comment">// namespace step20</span></div>

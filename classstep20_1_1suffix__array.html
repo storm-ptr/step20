@@ -118,8 +118,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adcb1f1e9e26953a1b6ac006b007e03ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f92cba0ba220d4ffd224b24dfbdf7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#a05f92cba0ba220d4ffd224b24dfbdf7d">suffix_array</a> (std::basic_string&lt; Char &gt; str, const Compare &amp;<a class="el" href="classstep20_1_1suffix__array.html#a9724f18e699e969a0376d3de53048285">comp</a>={})</td></tr>
 <tr class="separator:a05f92cba0ba220d4ffd224b24dfbdf7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe58e63102cbc284b71046110ca24cf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#afe58e63102cbc284b71046110ca24cf5">suffix_array</a> (std::ranges::input_range auto &amp;&amp;r, const Compare &amp;<a class="el" href="classstep20_1_1suffix__array.html#a9724f18e699e969a0376d3de53048285">comp</a>={})</td></tr>
-<tr class="separator:afe58e63102cbc284b71046110ca24cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f3098b7b5463c6616a047da2033460"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; </td></tr>
+<tr class="memitem:a57f3098b7b5463c6616a047da2033460"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#a57f3098b7b5463c6616a047da2033460">suffix_array</a> (R &amp;&amp;r, const Compare &amp;<a class="el" href="classstep20_1_1suffix__array.html#a9724f18e699e969a0376d3de53048285">comp</a>={})</td></tr>
+<tr class="separator:a57f3098b7b5463c6616a047da2033460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae79bfc3bb427edc2ceb757391f2a3347"><td class="memItemLeft" align="right" valign="top">std::span&lt; const Size &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1suffix__array.html#ae79bfc3bb427edc2ceb757391f2a3347">find</a> (std::ranges::input_range auto &amp;&amp;str) const</td></tr>
 <tr class="memdesc:ae79bfc3bb427edc2ceb757391f2a3347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find positions of suffixes starting with substring.  <br /></td></tr>
 <tr class="separator:ae79bfc3bb427edc2ceb757391f2a3347"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,13 +235,15 @@ template&lt;class Char , std::unsigned_integral Size = size_t, class Compare  = 
 
 </div>
 </div>
-<a id="afe58e63102cbc284b71046110ca24cf5" name="afe58e63102cbc284b71046110ca24cf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe58e63102cbc284b71046110ca24cf5">&#9670;&#160;</a></span>suffix_array() <span class="overload">[2/2]</span></h2>
+<a id="a57f3098b7b5463c6616a047da2033460" name="a57f3098b7b5463c6616a047da2033460"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57f3098b7b5463c6616a047da2033460">&#9670;&#160;</a></span>suffix_array() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Char , std::unsigned_integral Size = size_t, class Compare  = std::less&lt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;std::ranges::input_range R&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -248,7 +251,7 @@ template&lt;class Char , std::unsigned_integral Size = size_t, class Compare  = 
         <tr>
           <td class="memname"><a class="el" href="classstep20_1_1suffix__array.html">step20::suffix_array</a>&lt; Char, Size, Compare &gt;::suffix_array </td>
           <td>(</td>
-          <td class="paramtype">std::ranges::input_range auto &amp;&amp;&#160;</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
           <td class="paramname"><em>r</em>, </td>
         </tr>
         <tr>
