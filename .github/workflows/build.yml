@@ -5,28 +5,23 @@ on:
 jobs:
   run-on-ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dir: ['./example/diff', './example/suffix_tree_viz', './test']
+        compiler: ['g++']
     steps:
       - uses: actions/checkout@v3
-      - working-directory: ./example/diff
+      - working-directory: ${{ matrix.dir }}
         run: |
           chmod u+x ./gcc.sh
-          ./gcc.sh
-      - working-directory: ./example/suffix_tree_viz
-        run: |
-          chmod u+x ./gcc.sh
-          ./gcc.sh
-      - working-directory: ./test
-        run: |
-          chmod u+x ./gcc.sh
-          ./gcc.sh
+          ./gcc.sh ${{ matrix.compiler }}
   run-on-windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        dir: ['./example/diff', './example/suffix_tree_viz', './test']
     steps:
       - uses: actions/checkout@v3
       - uses: ilammy/msvc-dev-cmd@v1
-      - working-directory: ./example/diff
-        run: Invoke-Expression ./msvc.bat
-      - working-directory: ./example/suffix_tree_viz
-        run: Invoke-Expression ./msvc.bat
-      - working-directory: ./test
+      - working-directory: ${{ matrix.dir }}
         run: Invoke-Expression ./msvc.bat
