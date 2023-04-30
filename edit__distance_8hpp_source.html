@@ -143,7 +143,7 @@ $(function() {
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>          <span class="keyword">class </span>Equal = std::equal_to&lt;&gt;&gt;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">   77</a></span>O <a class="code hl_function" href="namespacestep20_1_1edit__distance.html#a0d3fa0d25f19e66cb3297fc98db5a1e3">zip</a>(<span class="keyword">const</span> R1&amp; r1, <span class="keyword">const</span> R2&amp; r2, O result, <span class="keyword">const</span> Equal&amp; eq = {})</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>{</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table{eq},</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> hirschberg::trace(detail::table&lt;Equal&gt;{eq},</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                             std::ranges::begin(r1),</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                             std::ranges::end(r1),</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                             std::ranges::begin(r2),</div>
