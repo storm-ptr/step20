@@ -76,7 +76,7 @@ template <std::ranges::random_access_range R1,
           class Equal = std::equal_to<>>
 O zip(const R1& r1, const R2& r2, O result, const Equal& eq = {})
 {
-    return hirschberg::trace(detail::table{eq},
+    return hirschberg::trace(detail::table<Equal>{eq},
                              std::ranges::begin(r1),
                              std::ranges::end(r1),
                              std::ranges::begin(r2),
