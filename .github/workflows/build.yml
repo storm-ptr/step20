@@ -8,9 +8,10 @@ jobs:
     strategy:
       matrix:
         dir: ['./example/diff', './example/suffix_tree_viz', './test']
-        compiler: ['g++']
+        compiler: ['clang++-16', 'g++']
     steps:
       - uses: actions/checkout@v3
+      - uses: egor-tensin/setup-clang@v1
       - working-directory: ${{ matrix.dir }}
         run: |
           chmod u+x ./gcc.sh
