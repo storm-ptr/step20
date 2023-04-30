@@ -1,6 +1,5 @@
 <img align="right" src="https://user-images.githubusercontent.com/3381451/40880432-5b9e7086-66b9-11e8-9718-4b1ea4eae317.png" width="20%">
 
-[![build status](https://app.travis-ci.com/storm-ptr/step20.svg?branch=main)](https://app.travis-ci.com/github/storm-ptr/step20)
 [![Build status](https://ci.appveyor.com/api/projects/status/github/storm-ptr/step20?svg=true&branch=main)](https://ci.appveyor.com/project/storm-ptr/step20/branch/main)
 [![build status](https://github.com/storm-ptr/step20/actions/workflows/build.yml/badge.svg)](https://github.com/storm-ptr/step20/actions/workflows/build.yml)
 
