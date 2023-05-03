@@ -16,16 +16,16 @@ Step20 is a C++20, header-only library of STL-like algorithms and data structure
 ### Table of Contents (wiki, examples)
 
 * [edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L134-L141)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L139-L146)
 * [longest common subsequence](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L299-L303),
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L304-L308),
   [example](https://github.com/storm-ptr/step20/blob/main/example/diff/diff.hpp#L49-L67)
 * [longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L320-L324)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L325-L329)
 * [longest repeated substring](https://en.wikipedia.org/wiki/Longest_repeated_substring_problem):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L366-L368)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L371-L373)
 * [suffix array](https://en.wikipedia.org/wiki/Suffix_array):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L447-L448)
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L452-L453)
 * [suffix tree](https://en.wikipedia.org/wiki/Suffix_tree):
-  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L476-L477),
+  [snippet](https://github.com/storm-ptr/step20/blob/main/test/main.cpp#L481-L482),
   [example](https://github.com/storm-ptr/step20/blob/main/example/suffix_tree_viz/suffix_tree_viz.hpp#L16-L42)
