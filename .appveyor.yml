@@ -1,22 +1,26 @@
-image:
-  - Visual Studio 2022
-  - Ubuntu2004
-
+image: Visual Studio 2022
 platform: x64
-
 configuration: Release
-
 clone_depth: 1
+
+environment:
+  matrix:
+    - COMPILER: cl
+      SUBDIR: "example/diff"
+    - COMPILER: cl
+      SUBDIR: "example/suffix_tree_viz"
+    - COMPILER: cl
+      SUBDIR: "test"
+    - COMPILER: clang-cl
+      SUBDIR: "example/diff"
+    - COMPILER: clang-cl
+      SUBDIR: "example/suffix_tree_viz"
+    - COMPILER: clang-cl
+      SUBDIR: "test"
 
 install:
   - cmd: call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 build_script:
-  - cmd: cd %APPVEYOR_BUILD_FOLDER%/example/diff
-  - cmd: msvc.bat
-  - cmd: cd %APPVEYOR_BUILD_FOLDER%/example/suffix_tree_viz
-  - cmd: msvc.bat
-  - cmd: cd %APPVEYOR_BUILD_FOLDER%/test
-  - cmd: msvc.bat
-  - sh: cd $APPVEYOR_BUILD_FOLDER
-  - sh: doxygen Doxyfile
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%/%SUBDIR%
+  - cmd: msvc.bat %COMPILER%
