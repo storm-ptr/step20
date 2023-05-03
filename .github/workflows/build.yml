@@ -20,8 +20,9 @@ jobs:
     strategy:
       matrix:
         dir: ['./example/diff', './example/suffix_tree_viz', './test']
+        compiler: ['cl']
     steps:
       - uses: actions/checkout@v3
       - uses: ilammy/msvc-dev-cmd@v1
       - working-directory: ${{ matrix.dir }}
-        run: Invoke-Expression ./msvc.bat
+        run: Invoke-Expression "./msvc.bat ${{ matrix.compiler }}"
