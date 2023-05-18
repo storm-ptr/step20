@@ -1,0 +1,102 @@
+// Andrew Naplavkov
+
+#ifndef STEP20_LEAST_FREQUENTLY_USED_HPP
+#define STEP20_LEAST_FREQUENTLY_USED_HPP
+
+#include <list>
+#include <unordered_map>
+
+namespace step20::least_frequently_used {
+
+/// An O(1) algorithm for implementing the LFU cache eviction scheme
+template <class Key,
+          class T,
+          class Hash = std::hash<Key>,
+          class KeyEqual = std::equal_to<Key>>
+class cache {
+    struct item_type;
+    using item_list = std::list<item_type>;
+    using item_iterator = typename item_list::iterator;
+    struct freq_type;
+    using freq_list = std::list<freq_type>;
+    using freq_iterator = typename freq_list::iterator;
+
+    struct item_type {
+        freq_iterator parent;
+        Key key;
+        T val;
+    };
+
+    struct freq_type {
+        size_t n;
+        item_list items;
+    };
+
+    freq_list list_;
+    std::unordered_map<Key, item_iterator, Hash, KeyEqual> map_;
+    size_t capacity_;
+
+    freq_iterator emplace(freq_iterator it, size_t n)
+    {
+        return it != list_.end() && it->n == n ? it : list_.emplace(it, n);
+    }
+
+public:
+    explicit cache(size_t capacity) : capacity_(capacity) {}
+
+    /// @return nullptr if key is not found
+    const T* find(const Key& key)
+    {
+        auto it = map_.find(key);
+        if (it == map_.end())
+            return nullptr;
+        auto item = it->second;
+        auto freq = item->parent;
+        auto next = emplace(std::next(freq), freq->n + 1);
+        try {
+            next->items.splice(next->items.end(), freq->items, item);
+        }
+        catch (...) {
+            if (next->items.empty())
+                list_.erase(next);
+            throw;
+        }
+        item->parent = next;
+        if (freq->items.empty())
+            list_.erase(freq);
+        return std::addressof(item->val);
+    }
+
+    /// Basic exception guarantee.
+    /// Evicted item is not restored if an exception occurs.
+    void insert_or_assign(const Key& key, const T& val)
+    {
+        if (auto ptr = find(key)) {
+            *const_cast<T*>(ptr) = val;
+            return;
+        }
+        if (!map_.empty() && map_.size() >= capacity_) {
+            auto freq = list_.begin();
+            auto item = freq->items.begin();
+            map_.erase(item->key);
+            freq->items.erase(item);
+            if (freq->items.empty())
+                list_.erase(freq);
+        }
+        auto freq = emplace(list_.begin(), 1);
+        bool was_freq_empty = freq->items.empty();
+        try {
+            auto item = freq->items.emplace(freq->items.end(), freq, key, val);
+            map_.emplace(key, item);
+        }
+        catch (...) {
+            if (was_freq_empty)
+                list_.erase(freq);
+            throw;
+        }
+    }
+};
+
+}  // namespace step20::least_frequently_used
+
+#endif  // STEP20_LEAST_FREQUENTLY_USED_HPP

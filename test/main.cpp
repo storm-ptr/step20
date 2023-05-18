@@ -14,6 +14,8 @@
 #include <step20/edit_distance.hpp>
 #include <step20/example/diff/diff.hpp>
 #include <step20/example/suffix_tree_viz/suffix_tree_viz.hpp>
+#include <step20/least_frequently_used.hpp>
+#include <step20/least_recently_used.hpp>
 #include <step20/longest_common_subsequence.hpp>
 #include <step20/longest_common_substring.hpp>
 #include <step20/longest_repeated_substring.hpp>
@@ -275,6 +277,37 @@ _1->0 [label="bxa$"]
     }
 }
 
+void test_least_frequently_used_hello_world()
+{
+    log("run");
+    auto lfu = least_frequently_used::cache<int, int>(2);
+    lfu.insert_or_assign(1, 1);
+    lfu.insert_or_assign(2, 2);
+    check(*lfu.find(1) == 1);
+    lfu.insert_or_assign(3, 3);
+    check(lfu.find(2) == nullptr);
+    check(*lfu.find(3) == 3);
+    lfu.insert_or_assign(4, 4);
+    check(lfu.find(1) == nullptr);
+    check(*lfu.find(3) == 3);
+    check(*lfu.find(4) == 4);
+}
+
+void test_least_recently_used_hello_world()
+{
+    log("run");
+    auto lru = least_recently_used::cache<int, int>(2);
+    lru.insert_or_assign(1, 1);
+    lru.insert_or_assign(2, 2);
+    check(*lru.find(1) == 1);
+    lru.insert_or_assign(3, 3);
+    check(lru.find(2) == nullptr);
+    lru.insert_or_assign(4, 4);
+    check(lru.find(1) == nullptr);
+    check(*lru.find(3) == 3);
+    check(*lru.find(4) == 4);
+}
+
 void test_longest_common_subsequence_case_insensitive()
 {
     log("run");
@@ -488,6 +521,8 @@ int main()
     test_edit_distance_hello_world();
     test_example_diff();
     test_example_suffix_tree_viz();
+    test_least_frequently_used_hello_world();
+    test_least_recently_used_hello_world();
     test_longest_common_subsequence_case_insensitive();
     test_longest_common_subsequence_hello_world();
     test_longest_common_substring_case_insensitive();

@@ -37,7 +37,8 @@ public:
         pos_ = node_ = 0;
     }
 
-    /// Basic exception guarantee
+    /// Basic exception guarantee.
+    /// Content is released if an exception occurs.
     void push_back(Char ch)
     try {
         str_.push_back(ch);
