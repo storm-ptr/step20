@@ -6,7 +6,7 @@ var searchData=
   ['longest_5fcommon_5fsubsequence_3',['longest_common_subsequence',['../namespacestep20_1_1longest__common__subsequence.html',1,'step20']]],
   ['longest_5fcommon_5fsubstring_4',['longest_common_substring',['../namespacestep20_1_1longest__common__substring.html',1,'step20']]],
   ['size_5',['size',['../classstep20_1_1suffix__tree.html#af5ea9915e20965402f075ba3f4777e46',1,'step20::suffix_tree::size()'],['../classstep20_1_1suffix__array.html#a684414781feaaa4080ed9e89eb917510',1,'step20::suffix_array::size()']]],
-  ['size_5ftype_6',['size_type',['../classstep20_1_1suffix__tree.html#a93d24f6d9437a0a8120bd4a0033ab996',1,'step20::suffix_tree::size_type()'],['../classstep20_1_1suffix__array.html#a3f5e068509fa1941bbb660b767144bd5',1,'step20::suffix_array::size_type()']]],
+  ['size_5ftype_6',['size_type',['../classstep20_1_1suffix__tree.html#a93d24f6d9437a0a8120bd4a0033ab996',1,'step20::suffix_tree::size_type'],['../classstep20_1_1suffix__array.html#a3f5e068509fa1941bbb660b767144bd5',1,'step20::suffix_array::size_type']]],
   ['slice_5ftype_7',['slice_type',['../structstep20_1_1suffix__tree_1_1slice__type.html',1,'step20::suffix_tree']]],
   ['step20_8',['step20',['../index.html',1,'(Global Namespace)'],['../namespacestep20.html',1,'step20']]],
   ['substring_5fsearch_9',['substring_search',['../namespacestep20_1_1substring__search.html',1,'step20']]],
