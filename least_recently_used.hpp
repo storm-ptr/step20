@@ -66,10 +66,10 @@ template <class Key,
           class KeyEqual = std::equal_to<Key>>
 class cache {
     detail::linked_hash_map<Key, T, Hash, KeyEqual> map_;
-    size_t capacity_;
+    std::size_t capacity_;
 
 public:
-    explicit cache(size_t capacity) : capacity_(capacity) {}
+    explicit cache(std::size_t capacity) : capacity_(capacity) {}
 
     /// @return nullptr if key is not found
     const T* find(const Key& key)

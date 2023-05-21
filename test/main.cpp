@@ -42,7 +42,7 @@ void check(bool cond,
     std::terminate();
 }
 
-std::string generate_random_string(size_t len)
+std::string generate_random_string(std::size_t len)
 {
     static auto gen = std::mt19937{std::random_device{}()};
     static auto dist = std::uniform_int_distribution<int>{'a', 'z'};
@@ -437,7 +437,7 @@ void test_substring_search()
     struct {
         std::string_view str;
         std::string_view substr;
-        std::initializer_list<size_t> expect;
+        std::initializer_list<std::size_t> expect;
     } tests[] = {
         {"", "", {0}},
         {"abc$", "", {0, 1, 2, 3, 4}},

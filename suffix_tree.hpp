@@ -19,7 +19,7 @@ namespace step20 {
 /// @param Size - to specify the maximum number / offset of characters;
 /// @param Map - to associate characters with nodes.
 template <class Char,
-          std::unsigned_integral Size = size_t,
+          std::unsigned_integral Size = std::size_t,
           class Map = std::unordered_map<Char, Size>>
 class suffix_tree {
 public:

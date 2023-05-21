@@ -18,7 +18,7 @@ namespace step20 {
 /// @param Size - to specify the maximum number / offset of characters;
 /// @param Compare - to determine the order of characters.
 template <class Char,
-          std::unsigned_integral Size = size_t,
+          std::unsigned_integral Size = std::size_t,
           class Compare = std::less<>>
 class suffix_array {
 public:
@@ -111,13 +111,13 @@ private:
 
 template <std::ranges::input_range R, class Compare = std::less<>>
 suffix_array(R, Compare = {})
-    -> suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
+    -> suffix_array<std::ranges::range_value_t<R>, std::size_t, Compare>;
 
 /// Kasai's algorithm for constructing longest common prefix array.
 
 /// Time and space complexity O(N), where: N - text length.
 template <class Char,
-          std::unsigned_integral Size = size_t,
+          std::unsigned_integral Size = std::size_t,
           class Compare = std::less<>>
 class enhanced_suffix_array : public suffix_array<Char, Size, Compare> {
     std::vector<Size> lcp_;
@@ -158,7 +158,9 @@ public:
 
 template <std::ranges::input_range R, class Compare = std::less<>>
 enhanced_suffix_array(R, Compare = {})
-    -> enhanced_suffix_array<std::ranges::range_value_t<R>, size_t, Compare>;
+    -> enhanced_suffix_array<std::ranges::range_value_t<R>,
+                             std::size_t,
+                             Compare>;
 
 }  // namespace step20
 

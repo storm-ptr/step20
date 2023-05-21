@@ -80,18 +80,18 @@ public:
     }
 };
 
-template <class T, size_t N>
+template <class T, std::size_t N>
 class ring_table {
     std::array<std::vector<T>, N> rows_;
 
 public:
-    explicit ring_table(size_t cols)
+    explicit ring_table(std::size_t cols)
     {
         for (auto& row : rows_)
             row.resize(cols);
     }
 
-    auto& operator[](size_t row) { return rows_[row % N]; }
+    auto& operator[](std::size_t row) { return rows_[row % N]; }
 };
 
 }  // namespace step20

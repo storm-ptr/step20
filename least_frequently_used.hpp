@@ -28,21 +28,21 @@ class cache {
     };
 
     struct freq_type {
-        size_t n;
+        std::size_t n;
         item_list items;
     };
 
     freq_list list_;
     std::unordered_map<Key, item_iterator, Hash, KeyEqual> map_;
-    size_t capacity_;
+    std::size_t capacity_;
 
-    freq_iterator emplace(freq_iterator it, size_t n)
+    bool equal(freq_iterator it, std::size_t n) const
     {
-        return it != list_.end() && it->n == n ? it : list_.emplace(it, n);
+        return it != list_.end() && it->n == n;
     }
 
 public:
-    explicit cache(size_t capacity) : capacity_(capacity) {}
+    explicit cache(std::size_t capacity) : capacity_(capacity) {}
 
     /// @return nullptr if key is not found
     const T* find(const Key& key)
@@ -52,7 +52,14 @@ public:
             return nullptr;
         auto item = it->second;
         auto freq = item->parent;
-        auto next = emplace(std::next(freq), freq->n + 1);
+        auto next = std::next(freq);
+        if (!equal(next, freq->n + 1)) {
+            if (freq->items.size() == 1) {
+                ++freq->n;
+                return std::addressof(item->val);
+            }
+            next = list_.emplace(next, freq->n + 1);
+        }
         try {
             next->items.splice(next->items.end(), freq->items, item);
         }
@@ -83,14 +90,14 @@ public:
             if (freq->items.empty())
                 list_.erase(freq);
         }
-        auto freq = emplace(list_.begin(), 1);
-        bool was_freq_empty = freq->items.empty();
+        auto exists = equal(list_.begin(), 1);
+        auto freq = exists ? list_.begin() : list_.emplace(list_.begin(), 1);
         try {
             auto item = freq->items.emplace(freq->items.end(), freq, key, val);
             map_.emplace(key, item);
         }
         catch (...) {
-            if (was_freq_empty)
+            if (!exists)
                 list_.erase(freq);
             throw;
         }
