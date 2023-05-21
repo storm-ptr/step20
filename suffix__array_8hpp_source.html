@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>Char,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>          std::unsigned_integral Size = size_t,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>          std::unsigned_integral Size = std::size_t,</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>          <span class="keyword">class </span>Compare = std::less&lt;&gt;&gt;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classstep20_1_1suffix__array.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classstep20_1_1suffix__array.html">suffix_array</a> {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
@@ -175,12 +175,12 @@ $(function() {
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">template</span> &lt;std::ranges::input_range R, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespacestep20.html#a2533fe45e7b57c73e3c7cf70e1d71efb">  113</a></span><a class="code hl_class" href="classstep20_1_1suffix__array.html">suffix_array</a>(R, Compare = {})</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    -&gt; suffix_array&lt;std::ranges::range_value_t&lt;R&gt;, <span class="keywordtype">size_t</span>, Compare&gt;;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespacestep20.html#aeea7d5510a452240c2818cef56ae23a5">  113</a></span><a class="code hl_class" href="classstep20_1_1suffix__array.html">suffix_array</a>(R, Compare = {})</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    -&gt; suffix_array&lt;std::ranges::range_value_t&lt;R&gt;, std::size_t, Compare&gt;;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">template</span> &lt;<span class="keyword">class </span>Char,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>          std::unsigned_integral Size = size_t,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>          std::unsigned_integral Size = std::size_t,</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>          <span class="keyword">class </span>Compare = std::less&lt;&gt;&gt;</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classstep20_1_1enhanced__suffix__array.html">  122</a></span><span class="keyword">class </span><a class="code hl_class" href="classstep20_1_1enhanced__suffix__array.html">enhanced_suffix_array</a> : <span class="keyword">public</span> <a class="code hl_class" href="classstep20_1_1suffix__array.html">suffix_array</a>&lt;Char, Size, Compare&gt; {</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    std::vector&lt;Size&gt; lcp_;</div>
@@ -220,12 +220,14 @@ $(function() {
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>};</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keyword">template</span> &lt;std::ranges::input_range R, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="namespacestep20.html#a15d872208c7220a45a0cb96e6b9e35e7">  160</a></span><a class="code hl_class" href="classstep20_1_1enhanced__suffix__array.html">enhanced_suffix_array</a>(R, Compare = {})</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    -&gt; enhanced_suffix_array&lt;std::ranges::range_value_t&lt;R&gt;, <span class="keywordtype">size_t</span>, Compare&gt;;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}  <span class="comment">// namespace step20</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="namespacestep20.html#a8295c505a07765d6e7dbadd4cd1613b5">  160</a></span><a class="code hl_class" href="classstep20_1_1enhanced__suffix__array.html">enhanced_suffix_array</a>(R, Compare = {})</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    -&gt; enhanced_suffix_array&lt;std::ranges::range_value_t&lt;R&gt;,</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                             std::size_t,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                             Compare&gt;;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_SUFFIX_ARRAY_HPP</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>}  <span class="comment">// namespace step20</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor">#endif  </span><span class="comment">// STEP20_SUFFIX_ARRAY_HPP</span></div>
 <div class="ttc" id="aclassstep20_1_1enhanced__suffix__array_html"><div class="ttname"><a href="classstep20_1_1enhanced__suffix__array.html">step20::enhanced_suffix_array</a></div><div class="ttdoc">Kasai's algorithm for constructing longest common prefix array.</div><div class="ttdef"><b>Definition</b> suffix_array.hpp:122</div></div>
 <div class="ttc" id="aclassstep20_1_1enhanced__suffix__array_html_a57ca54781c800cd32420ab53ad7c3d00"><div class="ttname"><a href="classstep20_1_1enhanced__suffix__array.html#a57ca54781c800cd32420ab53ad7c3d00">step20::enhanced_suffix_array::enhanced_suffix_array</a></div><div class="ttdeci">enhanced_suffix_array(R &amp;&amp;r, const Compare &amp;comp={})</div><div class="ttdef"><b>Definition</b> suffix_array.hpp:152</div></div>
 <div class="ttc" id="aclassstep20_1_1enhanced__suffix__array_html_a9538f7aaf5901fabd641c649fd9480bd"><div class="ttname"><a href="classstep20_1_1enhanced__suffix__array.html#a9538f7aaf5901fabd641c649fd9480bd">step20::enhanced_suffix_array::enhanced_suffix_array</a></div><div class="ttdeci">enhanced_suffix_array(suffix_array&lt; Char, Size, Compare &gt; &amp;&amp;arr)</div><div class="ttdef"><b>Definition</b> suffix_array.hpp:128</div></div>
