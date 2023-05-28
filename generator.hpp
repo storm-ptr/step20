@@ -48,18 +48,11 @@ struct generator : private std::unique_ptr<void, decltype(co_destroy)> {
         explicit iterator(handle coro) : handle{coro} {}
         reference operator*() const { return *this->promise(); }
         bool operator==(std::default_sentinel_t) const { return this->done(); }
+        void operator++(int) { this->resume(); }
 
         iterator& operator++()
         {
             this->resume();
-            return *this;
-        }
-
-        iterator operator++(int)
-        {
-            auto unchanged_value = std::move<std::optional<T>>(this->promise());
-            this->resume();
-            this->promise() = std::move(unchanged_value);
             return *this;
         }
     };
