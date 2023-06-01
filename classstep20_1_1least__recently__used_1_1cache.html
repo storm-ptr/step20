@@ -89,6 +89,16 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afe5c3618a93a5b424edc6d44791c9838"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#afe5c3618a93a5b424edc6d44791c9838">cache</a> (std::size_t capacity)</td></tr>
 <tr class="separator:afe5c3618a93a5b424edc6d44791c9838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a671378b267c6f3ff3203f443f56c21cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#a671378b267c6f3ff3203f443f56c21cc">cache</a> (<a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a671378b267c6f3ff3203f443f56c21cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ba19faec1d41b706d1024a19a8fd96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#ad6ba19faec1d41b706d1024a19a8fd96">operator=</a> (<a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:ad6ba19faec1d41b706d1024a19a8fd96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae925178a0bf590217877981a2c678f95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#ae925178a0bf590217877981a2c678f95">cache</a> (const <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;)=delete</td></tr>
+<tr class="separator:ae925178a0bf590217877981a2c678f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05da5f38b5666459d36c36e3a44602e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#af05da5f38b5666459d36c36e3a44602e">operator=</a> (const <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp;)=delete</td></tr>
+<tr class="separator:af05da5f38b5666459d36c36e3a44602e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af86c32b3ded4b0dc96b8b7765369c9ed"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#af86c32b3ded4b0dc96b8b7765369c9ed">~cache</a> ()=default</td></tr>
+<tr class="separator:af86c32b3ded4b0dc96b8b7765369c9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4f4eeea0547d7f296ccef2f87b023dc"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#aa4f4eeea0547d7f296ccef2f87b023dc">find</a> (const Key &amp;key)</td></tr>
 <tr class="separator:aa4f4eeea0547d7f296ccef2f87b023dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4d61f4bd66686f8b12a3029dd5e39a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html#af4d61f4bd66686f8b12a3029dd5e39a8">insert_or_assign</a> (const Key &amp;key, const T &amp;val)</td></tr>
@@ -99,7 +109,7 @@ Public Member Functions</h2></td></tr>
 class step20::least_recently_used::cache&lt; Key, T, Hash, KeyEqual &gt;</div><p>An O(1) algorithm for implementing the LRU cache eviction scheme. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afe5c3618a93a5b424edc6d44791c9838" name="afe5c3618a93a5b424edc6d44791c9838"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe5c3618a93a5b424edc6d44791c9838">&#9670;&#160;</a></span>cache()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5c3618a93a5b424edc6d44791c9838">&#9670;&#160;</a></span>cache() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,6 +130,89 @@ template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyE
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a671378b267c6f3ff3203f443f56c21cc" name="a671378b267c6f3ff3203f443f56c21cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a671378b267c6f3ff3203f443f56c21cc">&#9670;&#160;</a></span>cache() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyEqual  = std::equal_to&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">step20::least_recently_used::cache</a>&lt; Key, T, Hash, KeyEqual &gt;::cache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a>&lt; Key, T, Hash, KeyEqual &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae925178a0bf590217877981a2c678f95" name="ae925178a0bf590217877981a2c678f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae925178a0bf590217877981a2c678f95">&#9670;&#160;</a></span>cache() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyEqual  = std::equal_to&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">step20::least_recently_used::cache</a>&lt; Key, T, Hash, KeyEqual &gt;::cache </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a>&lt; Key, T, Hash, KeyEqual &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af86c32b3ded4b0dc96b8b7765369c9ed" name="af86c32b3ded4b0dc96b8b7765369c9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86c32b3ded4b0dc96b8b7765369c9ed">&#9670;&#160;</a></span>~cache()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyEqual  = std::equal_to&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">step20::least_recently_used::cache</a>&lt; Key, T, Hash, KeyEqual &gt;::~<a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -192,6 +285,62 @@ template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyE
 </table>
 </div><div class="memdoc">
 <p>Basic exception guarantee. Inserted item remains if an exception occurs. </p>
+
+</div>
+</div>
+<a id="ad6ba19faec1d41b706d1024a19a8fd96" name="ad6ba19faec1d41b706d1024a19a8fd96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ba19faec1d41b706d1024a19a8fd96">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyEqual  = std::equal_to&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp; <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">step20::least_recently_used::cache</a>&lt; Key, T, Hash, KeyEqual &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a>&lt; Key, T, Hash, KeyEqual &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af05da5f38b5666459d36c36e3a44602e" name="af05da5f38b5666459d36c36e3a44602e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05da5f38b5666459d36c36e3a44602e">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Key , class T , class Hash  = std::hash&lt;Key&gt;, class KeyEqual  = std::equal_to&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a> &amp; <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">step20::least_recently_used::cache</a>&lt; Key, T, Hash, KeyEqual &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstep20_1_1least__recently__used_1_1cache.html">cache</a>&lt; Key, T, Hash, KeyEqual &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
