@@ -18,7 +18,12 @@ public:
     using value_type = std::pair<const Key, T>;
     using list_type = std::list<value_type>;
     using iterator = typename list_type::iterator;
-
+    linked_hash_map() = default;
+    linked_hash_map(linked_hash_map&&) = default;
+    linked_hash_map& operator=(linked_hash_map&&) = default;
+    linked_hash_map(const linked_hash_map&) = delete;
+    linked_hash_map& operator=(const linked_hash_map&) = delete;
+    virtual ~linked_hash_map() = default;
     auto size() const { return list_.size(); }
     iterator begin() { return list_.begin(); }
     iterator end() { return list_.end(); }
@@ -70,6 +75,11 @@ class cache {
 
 public:
     explicit cache(std::size_t capacity) : capacity_(capacity) {}
+    cache(cache&&) = default;
+    cache& operator=(cache&&) = default;
+    cache(const cache&) = delete;
+    cache& operator=(const cache&) = delete;
+    virtual ~cache() = default;
 
     /// @return nullptr if key is not found
     const T* find(const Key& key)

@@ -43,6 +43,11 @@ class cache {
 
 public:
     explicit cache(std::size_t capacity) : capacity_(capacity) {}
+    cache(cache&&) = default;
+    cache& operator=(cache&&) = default;
+    cache(const cache&) = delete;
+    cache& operator=(const cache&) = delete;
+    virtual ~cache() = default;
 
     /// @return nullptr if key is not found
     const T* find(const Key& key)
