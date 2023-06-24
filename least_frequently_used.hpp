@@ -3,6 +3,7 @@
 #ifndef STEP20_LEAST_FREQUENTLY_USED_HPP
 #define STEP20_LEAST_FREQUENTLY_USED_HPP
 
+#include <algorithm>
 #include <list>
 #include <unordered_map>
 
@@ -87,7 +88,7 @@ public:
             *const_cast<T*>(ptr) = val;
             return;
         }
-        if (!map_.empty() && map_.size() >= capacity_) {
+        if (map_.size() >= std::max<std::size_t>(1, capacity_)) {
             auto freq = list_.begin();
             auto item = freq->items.begin();
             map_.erase(item->key);
@@ -95,15 +96,19 @@ public:
             if (freq->items.empty())
                 list_.erase(freq);
         }
-        auto exists = equal(list_.begin(), 1);
-        auto freq = exists ? list_.begin() : list_.emplace(list_.begin(), 1);
+        auto freq = list_.begin();
+        auto exists = equal(freq, 1);
+        freq = exists ? freq : list_.emplace(freq, 1);
+        auto item = freq->items.end();
         try {
-            auto item = freq->items.emplace(freq->items.end(), freq, key, val);
+            item = freq->items.emplace(item, freq, key, val);
             map_.emplace(key, item);
         }
         catch (...) {
             if (!exists)
                 list_.erase(freq);
+            else if (item != freq->items.end())
+                freq->items.erase(item);
             throw;
         }
     }
